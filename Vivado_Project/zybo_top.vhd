@@ -19,8 +19,8 @@ entity zybo_top is
         -- spi (fpga <-> pi)
         iSCK: in std_logic;
         iCSN: in std_logic;
-        oMOSI: out std_logic;
-        iMISO: in std_logic;
+        oMISO: out std_logic;
+        iMOSI: in std_logic;
 
         -- i2c
         ioSDA: inout std_logic;
@@ -65,15 +65,15 @@ entity zybo_top is
 	
     -- TODO: define pinout (1st task)
     attribute loc: string;
-    attribute loc of iCLK: 	  signal is "K17";          -- 125 MHz pin
-    attribute loc of iUART:   signal is "V12";          -- Std Pmod JE pg29 z7RM
+    attribute loc of iCLK: 	  signal is "K17";  -- 125 MHz pin
+    attribute loc of iUART:   signal is "V12";  -- Std Pmod JE pg29 z7RM
     attribute loc of oUART:   signal is "W16";
-    -- attribute loc of iSCK: 	 signal is "DEFINE ME";	    -- should be HS-PMOD
-    -- attribute loc of iCSN: 	 signal is "DEFINE ME";	    -- should be PMOD
-    -- attribute loc of oMOSI:   signal is "DEFINE ME";	    -- should be PMOD
-    -- attribute loc of iMISO:   signal is "DEFINE ME";	    -- should be PMOD
-    -- attribute loc of ioSDA:   signal is "DEFINE ME";
-    -- attribute loc of ioSCL:   signal is "DEFINE ME";
+    attribute loc of iSCK: 	  signal is "V15";
+    attribute loc of iCSN: 	  signal is "W15";
+    attribute loc of oMISO:   signal is "T11";
+    attribute loc of iMOSI:   signal is "T10";
+    attribute loc of ioSDA:   signal is "W14";
+    attribute loc of ioSCL:   signal is "Y14";
     -- pg 22: hph out(blk), mic in(pink), line in(blue): J5, J6, J7
     -- pins below located pg22 of Zybo RM
     attribute loc of oBCLK:   signal is "R19";
@@ -108,8 +108,8 @@ architecture v1 of zybo_top is
             -- spi
             iSck: in std_logic;
             iCsn: in std_logic;
-            oMosi: out std_logic;
-            iMiso: in std_logic;
+            oMiso: out std_logic;
+            iMosi: in std_logic;
 
             -- i2c
             iSda: in std_logic;
@@ -187,8 +187,8 @@ begin
             -- spi
             iSck => iSck,
             iCsn => iCsn,
-            oMosi => oMosi,
-            iMiso => iMiso,
+            oMiSO => oMiSO,
+            iMOSI => iMOSI,
 
             -- i2c
             iSda => sIO_odata(0),

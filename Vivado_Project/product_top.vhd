@@ -17,8 +17,8 @@ entity product_top is
         -- spi
         iSck: in std_logic;
         iCsn: in std_logic;
-        oMosi: out std_logic;
-        iMiso: in std_logic;
+        oMiso: out std_logic;
+        iMosi: in std_logic;
 
         -- i2c
         iSda: in std_logic;
@@ -62,14 +62,14 @@ architecture v1 of product_top is
             iReset: in std_logic;
 
             -- uart
-            iUart: in std_logic;
-            oUart: out std_logic;
+            iUart_dbg: in std_logic;
+            oUart_dbg: out std_logic;
 
             -- spi
             iSck: in std_logic;
             iCsn: in std_logic;
-            iMiso: in std_logic;
-            oMosi: out std_logic
+            oMiso: out std_logic;
+            iMosi: in std_logic;
 
             -- i2c
 --            iSda: in std_logic;
@@ -87,7 +87,7 @@ architecture v1 of product_top is
 --            oSdin: out std_logic;
 
             -- misc/system
---            oMute: out std_logic;
+            oGPIO: out std_logic
 
         -- internals
 --            iNd: in std_logic;
@@ -100,36 +100,36 @@ architecture v1 of product_top is
         );
     end component;
 
-    component i2s_ctrl
-        port (
-            iClk_core: in std_logic;
-            iReset_core: in std_logic;
-            iClk_i2s: in std_logic;
-            iReset_i2s: in std_logic;
+--    component i2s_ctrl
+--        port (
+--            iClk_core: in std_logic;
+--            iReset_core: in std_logic;
+--            iClk_i2s: in std_logic;
+--            iReset_i2s: in std_logic;
 
-        -- internals
-            iNd: in std_logic;
-            iData: in std_logic_vector (cW-1 downto 0);
-            oAck: out std_logic;
+--        -- internals
+--            iNd: in std_logic;
+--            iData: in std_logic_vector (cW-1 downto 0);
+--            oAck: out std_logic;
 
-            oNd: out std_logic;
-            oData: out std_logic_vector (cW-1 downto 0);
-            iAck: in std_logic;
+--            oNd: out std_logic;
+--            oData: out std_logic_vector (cW-1 downto 0);
+--            iAck: in std_logic;
 
-        -- SSM2603
-             -- i2s: 2 channels sampled @ BCLK
-            oBclk: out std_logic; -- i2s clock
-            -- playback channel
-            oPbdat: out std_logic; -- i2s playback data
-            oPblrc: out std_logic; -- i2s playback left-right signal
-            -- record channel
-            oRecdat: out std_logic; -- i2s recorded data
-            oReclrc: out std_logic; -- i2s rec left-right signal
+--        -- SSM2603
+--             -- i2s: 2 channels sampled @ BCLK
+--            oBclk: out std_logic; -- i2s clock
+--            -- playback channel
+--            oPbdat: out std_logic; -- i2s playback data
+--            oPblrc: out std_logic; -- i2s playback left-right signal
+--            -- record channel
+--            oRecdat: out std_logic; -- i2s recorded data
+--            oReclrc: out std_logic; -- i2s rec left-right signal
 
-            -- misc/system
-            oMclk: out std_logic
-       );
-    end component;
+--            -- misc/system
+--            oMclk: out std_logic
+--       );
+--    end component;
 
     signal sNd_tx: std_logic;
     signal sData_tx: std_logic_vector (cW-1 downto 0);
@@ -147,14 +147,14 @@ begin
 
         -- rpi comms
             -- uart
-            iUart => iUart,
-            oUart => oUart,
+            iUart_dbg => iUart,
+            oUart_dbg => oUart,
 
             -- spi
             iSck => iSck,
             iCsn => iCsn,
-            oMosi => oMosi,
-            iMiso => iMiso
+            oMiso => oMiso,
+            iMosi => iMosi,
 
             -- i2c
    --         iSda => iSda,
@@ -172,7 +172,7 @@ begin
 --            oSdin => oSdin,
 
             -- misc/system
---            oMute => oMute,
+            oGPIO => oMute
 
         -- internals
 --            iNd => sNd_tx,
@@ -184,34 +184,34 @@ begin
 --            iAck => sAck_rx
         );
 
-    i2s_ctrl_inst: i2s_ctrl
-        port map (
-            iClk_core => iClk_core,
-            iReset_core => iReset_core,
-            iClk_i2s => iClk_i2s,
-            iReset_i2s => iReset_i2s,
+--    i2s_ctrl_inst: i2s_ctrl
+--        port map (
+--            iClk_core => iClk_core,
+--            iReset_core => iReset_core,
+--            iClk_i2s => iClk_i2s,
+--            iReset_i2s => iReset_i2s,
 
-        -- internals
-            iNd => sNd_rx,
-            iData => sData_rx,
-            oAck => sAck_rx,
+--        -- internals
+--            iNd => sNd_rx,
+--            iData => sData_rx,
+--            oAck => sAck_rx,
 
-            oNd => sNd_tx,
-            oData => sData_tx,
-            iAck => sAck_tx,
+--            oNd => sNd_tx,
+--            oData => sData_tx,
+--            iAck => sAck_tx,
 
-        -- SSM2603
-             -- i2s: 2 channels sampled @ BCLK
-            oBclk => oBclk,
-            -- playback channel
-            oPbdat => oPbdat,
-            oPblrc => oPblrc,
-            -- record channel
-            oRecdat => oRecdat,
-            oReclrc => oReclrc,
+--        -- SSM2603
+--             -- i2s: 2 channels sampled @ BCLK
+--            oBclk => oBclk,
+--            -- playback channel
+--            oPbdat => oPbdat,
+--            oPblrc => oPblrc,
+--            -- record channel
+--            oRecdat => oRecdat,
+--            oReclrc => oReclrc,
 
-            -- misc/system
-            oMclk => oMclk
-       );
+--            -- misc/system
+--            oMclk => oMclk
+--       );
 
 end v1;

@@ -35,6 +35,7 @@ set_property -name "xpm_libraries" -value "XPM_CDC" -objects $obj
 
 
 add_files [glob ${origin_dir}/*.vhd]
+add_files [glob ${origin_dir}/clk_wiz_0/*.xci]
 
 #
 # Sources

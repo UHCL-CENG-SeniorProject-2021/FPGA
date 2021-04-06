@@ -67,6 +67,7 @@ entity zybo_top is
     attribute loc of oSCLK: signal is "N18";
     attribute loc of oMUTE: signal is "P18";
     attribute loc of oMCLK: signal is "T19";
+	
 end entity;
 
 architecture v1 of zybo_top is

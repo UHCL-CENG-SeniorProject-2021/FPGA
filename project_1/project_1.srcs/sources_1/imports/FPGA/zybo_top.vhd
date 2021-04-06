@@ -10,7 +10,6 @@ entity zybo_top is
 -- system signals
         iCLK: in std_logic;
         iRESET: in std_logic;
-
 --------------------------------------------
 -- rpi comms
 
@@ -47,26 +46,27 @@ entity zybo_top is
         oMUTE: out std_logic;
         oMCLK: out std_logic
     );
+	
     -- TODO: define pinout (1st task)
     attribute loc: string;
-    attribute loc of iCLK: signal is "K17";
-    attribute loc of iUART: signal is "DEFINE ME";
-    attribute loc of oUART: signal is "DEFINE ME";
-    attribute loc of iSCK: signal is "DEFINE ME";
-    attribute loc of iCSN: signal is "DEFINE ME";
-    attribute loc of oMOSI: signal is "DEFINE ME";
-    attribute loc of iMISO: signal is "DEFINE ME";
-    attribute loc of ioSDA: signal is "DEFINE ME";
-    attribute loc of ioSCL: signal is "DEFINE ME";
-    attribute loc of oBCLK: signal is "K18";
-    attribute loc of oPBDAT: signal is "M17";
-    attribute loc of oPBLRC: signal is "L17";
-    attribute loc of oRECDAT: signal is "K17";
+    attribute loc of iCLK: 	  signal is "K17";
+    attribute loc of iUART:   signal is "DEFINE ME";
+    attribute loc of oUART:   signal is "DEFINE ME";
+    attribute loc of iSCK: 	  signal is "DEFINE ME";
+    attribute loc of iCSN: 	  signal is "DEFINE ME";
+    attribute loc of oMOSI:   signal is "DEFINE ME";
+    attribute loc of iMISO:   signal is "DEFINE ME";
+    attribute loc of ioSDA:   signal is "DEFINE ME";
+    attribute loc of ioSCL:   signal is "DEFINE ME";
+    attribute loc of oBCLK:   signal is "K18";
+    attribute loc of oPBDAT:  signal is "M17";
+    attribute loc of oPBLRC:  signal is "L17";
+    attribute loc of oRECDAT: signal is "K17";	-- R16?
     attribute loc of oRECLRC: signal is "M18";
-    attribute loc of ioSDIN: signal is "N17";
-    attribute loc of oSCLK: signal is "N18";
-    attribute loc of oMUTE: signal is "P18";
-    attribute loc of oMCLK: signal is "T19";
+    attribute loc of ioSDIN:  signal is "N17";
+    attribute loc of oSCLK:   signal is "N18";
+    attribute loc of oMUTE:   signal is "P18";
+    attribute loc of oMCLK:   signal is "T19";
 end entity;
 
 architecture v1 of zybo_top is

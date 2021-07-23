@@ -36,9 +36,28 @@ set_property -name "xpm_libraries" -value "XPM_CDC" -objects $obj
 
 add_files [glob ${origin_dir}/*.vhd]
 add_files [glob ${origin_dir}/*.xci]
-add_files [glob ${origin_dir}/*.xdc]
 
+#
+# Sources
+#
 
 # Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
 set_property -name "top" -value "zybo_top" -objects $obj
+
+#
+# Constraints
+#
+
+# Set 'constrs_1' fileset object
+set obj [get_filesets constrs_1]
+
+# Add/Import constrs file and set constrs file properties
+set file "[file normalize "$origin_dir/Constraints.xdc"]"
+puts $file
+set file_imported [import_files -fileset constrs_1 [list $file]]
+puts $file_imported
+set_property -name "target_constrs_file" -value "[get_files Constraints.xdc]" -objects $obj
+
+# TODO: set up grlib/gaisler library for UART comms between fpga and ft232
+# and make necessary signal connections between components and pins

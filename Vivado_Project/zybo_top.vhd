@@ -14,7 +14,7 @@ entity zybo_top is
 --------------------------------------------
 -- rpi comms
 
-        -- uart
+        -- uart (tx/rx)
         iUART: in std_logic;
         oUART: out std_logic;
 
@@ -67,24 +67,26 @@ entity zybo_top is
 	
     -- TODO: define pinout (1st task)
     attribute loc: string;
-    attribute loc of iCLK: 	  signal is "K17";
-    -- attribute loc of iUART:   signal is "DEFINE ME";	-- not using UART?
-    -- attribute loc of oUART:   signal is "DEFINE ME";	-- not using UART?
-    attribute loc of iSCK: 	  signal is "DEFINE ME";	-- should be PMOD
-    attribute loc of iCSN: 	  signal is "DEFINE ME";	-- should be PMOD
-    attribute loc of oMOSI:   signal is "DEFINE ME";	-- should be PMOD
-    attribute loc of iMISO:   signal is "DEFINE ME";	-- should be PMOD
-    attribute loc of ioSDA:   signal is "DEFINE ME";
-    attribute loc of ioSCL:   signal is "DEFINE ME";
-    attribute loc of oBCLK:   signal is "K18";
-    attribute loc of oPBDAT:  signal is "M17";
-    attribute loc of oPBLRC:  signal is "L17";
-    attribute loc of oRECDAT: signal is "K17";	-- R16?
-    attribute loc of oRECLRC: signal is "M18";
+    attribute loc of iCLK: 	  signal is "K17";          -- 125 MHz pin
+    attribute loc of iUART:   signal is "V12";          -- Std Pmod JE pg29 z7RM
+    attribute loc of oUART:   signal is "W16";
+    -- attribute loc of iSCK: 	 signal is "DEFINE ME";	    -- should be HS-PMOD
+    -- attribute loc of iCSN: 	 signal is "DEFINE ME";	    -- should be PMOD
+    -- attribute loc of oMOSI:   signal is "DEFINE ME";	    -- should be PMOD
+    -- attribute loc of iMISO:   signal is "DEFINE ME";	    -- should be PMOD
+    -- attribute loc of ioSDA:   signal is "DEFINE ME";
+    -- attribute loc of ioSCL:   signal is "DEFINE ME";
+    -- pg 22: hph out(blk), mic in(pink), line in(blue): J5, J6, J7
+    -- pins below located pg22 of Zybo RM
+    attribute loc of oBCLK:   signal is "R19";
+    attribute loc of oPBDAT:  signal is "R18";
+    attribute loc of oPBLRC:  signal is "T19";
+    attribute loc of oRECDAT: signal is "R16";
+    attribute loc of oRECLRC: signal is "Y18";
     attribute loc of ioSDIN:  signal is "N17";
     attribute loc of oSCLK:   signal is "N18";
     attribute loc of oMUTE:   signal is "P18";
-    attribute loc of oMCLK:   signal is "T19";
+    attribute loc of oMCLK:   signal is "R17";
 end entity;
 
 architecture v1 of zybo_top is

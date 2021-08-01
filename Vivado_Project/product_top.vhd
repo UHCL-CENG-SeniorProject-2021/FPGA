@@ -56,12 +56,11 @@ architecture v1 of product_top is
     -- max width of audio data sample vector
     constant cW: natural := 1;
 
-    component grlib_system
+    component logic_top
         port (
-            iClk_core: in std_logic;
-            iReset_core: in std_logic;
+            iClk: in std_logic;        -- was iClk_core, changed to iClk 
+            iReset: in std_logic;
 
-        -- rpi comms
             -- uart
             iUart: in std_logic;
             oUart: out std_logic;
@@ -69,8 +68,8 @@ architecture v1 of product_top is
             -- spi
             iSck: in std_logic;
             iCsn: in std_logic;
-            oMosi: out std_logic;
             iMiso: in std_logic;
+            oMosi: out std_logic;
 
             -- i2c
             iSda: in std_logic;
@@ -141,10 +140,10 @@ architecture v1 of product_top is
 
 begin
 
-    ctrl: grlib_system
+    ctrl: logic_top
         port map (
-            iClk_core => iClk_core,
-            iReset_core => iReset_core,
+            iClk => iClk_core,
+            iReset => iReset_core,
 
         -- rpi comms
             -- uart

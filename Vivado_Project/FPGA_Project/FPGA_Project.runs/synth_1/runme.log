@@ -1,0 +1,61 @@
+
+*** Running vivado
+    with args -log zybo_top.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source zybo_top.tcl
+
+
+****** Vivado v2019.2 (64-bit)
+  **** SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
+  **** IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
+    ** Copyright 1986-2019 Xilinx, Inc. All Rights Reserved.
+
+source zybo_top.tcl -notrace
+Command: synth_design -top zybo_top -part xc7z020clg400-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Device 21-403] Loading part xc7z020clg400-1
+INFO: Launching helper process for spawning children vivado processes
+INFO: Helper process launched with PID 22060 
+---------------------------------------------------------------------------------
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:04 . Memory (MB): peak = 874.355 ; gain = 233.770
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'zybo_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/zybo_top.vhd:90]
+INFO: [Synth 8-3491] module 'product_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:4' bound to instance 'top' of component 'product_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/zybo_top.vhd:174]
+INFO: [Synth 8-638] synthesizing module 'product_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:53]
+WARNING: [Synth 8-5640] Port 'imosi' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+WARNING: [Synth 8-5640] Port 'omiso' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+WARNING: [Synth 8-5640] Port 'iuart_dbg' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+WARNING: [Synth 8-5640] Port 'ouart_dbg' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+WARNING: [Synth 8-5640] Port 'igpio' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+WARNING: [Synth 8-5640] Port 'ogpio' is missing in component declaration [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:59]
+INFO: [Synth 8-3491] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' bound to instance 'ctrl' of component 'logic_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'imiso' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'omosi' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'isda' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'osda_e' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'osda' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'iscl' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'oscl_e' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'oscl' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'osclk' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'isdin' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'osdin_e' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'osdin' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'omute' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'ind' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'idata' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'oack' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'ond' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'odata' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-3493] module 'logic_top' declared at 'C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd:14' does not have matching formal port for component port 'iack' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:143]
+ERROR: [Synth 8-285] failed synthesizing module 'product_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd:53]
+ERROR: [Synth 8-285] failed synthesizing module 'zybo_top' [C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/zybo_top.vhd:90]
+---------------------------------------------------------------------------------
+Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 965.809 ; gain = 325.223
+---------------------------------------------------------------------------------
+RTL Elaboration failed
+INFO: [Common 17-83] Releasing license: Synthesis
+7 Infos, 6 Warnings, 0 Critical Warnings and 22 Errors encountered.
+synth_design failed
+ERROR: [Common 17-69] Command failed: Synthesis failed - please see the console or run log file for details
+INFO: [Common 17-206] Exiting Vivado at Sun Aug  1 17:19:57 2021...

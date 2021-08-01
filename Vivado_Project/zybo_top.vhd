@@ -3,14 +3,12 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
-
 entity zybo_top is
     port (
 --------------------------------------------
 -- system signals
         iCLK: in std_logic;
         iRESET: in std_logic;
-		
 --------------------------------------------
 -- rpi comms
 
@@ -18,7 +16,7 @@ entity zybo_top is
         iUART: in std_logic;
         oUART: out std_logic;
 
-        -- spi (fpga->pi, pi->fpga)
+        -- spi (fpga <-> pi)
         iSCK: in std_logic;
         iCSN: in std_logic;
         oMOSI: out std_logic;
@@ -63,7 +61,7 @@ entity zybo_top is
         -- misc/system
         oMUTE: out std_logic;
         oMCLK: out std_logic
-    );
+    ); -- END PORT
 	
     -- TODO: define pinout (1st task)
     attribute loc: string;

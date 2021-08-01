@@ -38,7 +38,6 @@ use UNISIM.vcomponents.all;
 	end component;
 	
 	signal reset: std_logic;
-	
 		begin
 	
 	oReset_core <= not reset;
@@ -60,7 +59,7 @@ use UNISIM.vcomponents.all;
       T => iIO_en(2)      	-- 3-state enable input, high=input, low=output 
    );
    
-	clk_wiz_0_isntance: clk_wiz_0
+	clk_wiz_0_instance: clk_wiz_0
 	 port map (
 	  -- Clock out ports
 	  clk_out1 => oClk_core,

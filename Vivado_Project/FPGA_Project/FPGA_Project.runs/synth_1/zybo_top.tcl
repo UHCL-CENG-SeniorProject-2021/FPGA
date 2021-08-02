@@ -3,6 +3,58 @@
 # 
 
 set TIME_start [clock seconds] 
+namespace eval ::optrace {
+  variable script "C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.runs/synth_1/zybo_top.tcl"
+  variable category "vivado_synth"
+}
+
+# Try to connect to running dispatch if we haven't done so already.
+# This code assumes that the Tcl interpreter is not using threads,
+# since the ::dispatch::connected variable isn't mutex protected.
+if {![info exists ::dispatch::connected]} {
+  namespace eval ::dispatch {
+    variable connected false
+    if {[llength [array get env XILINX_CD_CONNECT_ID]] > 0} {
+      set result "true"
+      if {[catch {
+        if {[lsearch -exact [package names] DispatchTcl] < 0} {
+          set result [load librdi_cd_clienttcl[info sharedlibextension]] 
+        }
+        if {$result eq "false"} {
+          puts "WARNING: Could not load dispatch client library"
+        }
+        set connect_id [ ::dispatch::init_client -mode EXISTING_SERVER ]
+        if { $connect_id eq "" } {
+          puts "WARNING: Could not initialize dispatch client"
+        } else {
+          puts "INFO: Dispatch client connection id - $connect_id"
+          set connected true
+        }
+      } catch_res]} {
+        puts "WARNING: failed to connect to dispatch server - $catch_res"
+      }
+    }
+  }
+}
+if {$::dispatch::connected} {
+  # Remove the dummy proc if it exists.
+  if { [expr {[llength [info procs ::OPTRACE]] > 0}] } {
+    rename ::OPTRACE ""
+  }
+  proc ::OPTRACE { task action {tags {} } } {
+    ::vitis_log::op_trace "$task" $action -tags $tags -script $::optrace::script -category $::optrace::category
+  }
+  # dispatch is generic. We specifically want to attach logging.
+  ::vitis_log::connect_client
+} else {
+  # Add dummy proc if it doesn't exist.
+  if { [expr {[llength [info procs ::OPTRACE]] == 0}] } {
+    proc ::OPTRACE {{arg1 \"\" } {arg2 \"\"} {arg3 \"\" } {arg4 \"\"} {arg5 \"\" } {arg6 \"\"}} {
+        # Do nothing
+    }
+  }
+}
+
 proc create_report { reportName command } {
   set status "."
   append status $reportName ".fail"
@@ -17,80 +69,85 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
+OPTRACE "synth_1" START { ROLLUP_AUTO }
+OPTRACE "Creating in-memory project" START { }
 create_project -in_memory -part xc7z020clg400-1
 
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
 set_msg_config -source 4 -id {IP_Flow 19-2162} -severity warning -new_severity info
-set_property webtalk.parent_dir {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.cache/wt} [current_project]
-set_property parent.project_path {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.xpr} [current_project]
+set_property webtalk.parent_dir C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.cache/wt [current_project]
+set_property parent.project_path C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.xpr [current_project]
 set_property XPM_LIBRARIES XPM_CDC [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language VHDL [current_project]
-set_property ip_output_repo {c:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.cache/ip} [current_project]
+set_property ip_output_repo c:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
+OPTRACE "Creating in-memory project" END { }
+OPTRACE "Adding files" START { }
 read_vhdl -library grlib {
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/version.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/stdlib.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/config_types.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/config.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/amba.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/devices.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/stdio.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/testlib.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/ahbctrl.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/ahbmst.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/apbctrl.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/apbctrlx.vhd}
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/version.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/stdlib.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/config_types.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/config.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/amba.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/devices.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/stdio.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/stdlib/testlib.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/ahbctrl.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/ahbmst.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/apbctrl.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/grlib/amba/apbctrlx.vhd
 }
 read_vhdl -library techmap {
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/gencomp/gencomp.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/alltech/allclkgen.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/alltech/allmem.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/gencomp/netcomp.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/grgates.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/altera_mf/memory_altera_mf.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/ec/memory_ec.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/eclipsee/memory_eclipse.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/inferred/memory_inferred.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_kintex7.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_ultrascale.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_unisim.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/virage/memory_virage.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/virtex/memory_virtex.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/memrwcol.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/spictrl_net.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/spictrl_unisim.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/syncram_2p.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/syncreg.vhd}
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/gencomp/gencomp.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/alltech/allclkgen.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/alltech/allmem.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/gencomp/netcomp.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/grgates.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/altera_mf/memory_altera_mf.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/ec/memory_ec.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/eclipsee/memory_eclipse.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/inferred/memory_inferred.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_kintex7.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_ultrascale.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/memory_unisim.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/virage/memory_virage.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/virtex/memory_virtex.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/memrwcol.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/spictrl_net.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/unisim/spictrl_unisim.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/syncram_2p.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/techmap/maps/syncreg.vhd
 }
 read_vhdl -library gaisler {
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/misc.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/uart.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/libdcom.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/ahbuart.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/apbuart.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/leon3/leon3.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/dcom.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/dcom_uart.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/grgpio.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spi.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/rstgen.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spictrl.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spictrlx.vhd}
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/misc.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/uart.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/libdcom.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/ahbuart.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/apbuart.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/leon3/leon3.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/dcom.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/uart/dcom_uart.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/grgpio.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spi.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/misc/rstgen.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spictrl.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/imports/gaisler/spi/spictrlx.vhd
 }
 read_vhdl -library xil_defaultlib {
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/logic_top.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/product_top.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/zybo_glue.vhd}
-  {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/zybo_top.vhd}
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/logic_top.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/product_top.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/zybo_glue.vhd
+  C:/Users/brand/Desktop/john/FPGA/Vivado_Project/zybo_top.vhd
 }
-read_ip -quiet {{C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci}}
-set_property used_in_implementation false [get_files -all {{c:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc}}]
-set_property used_in_implementation false [get_files -all {{c:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc}}]
-set_property used_in_implementation false [get_files -all {{c:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc}}]
+read_ip -quiet C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xci
+set_property used_in_implementation false [get_files -all c:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_board.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0.xdc]
+set_property used_in_implementation false [get_files -all c:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/ip/clk_wiz_0/clk_wiz_0_ooc.xdc]
 
+OPTRACE "Adding files" END { }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
 # design are intentionally left as such for best results. Dcp files will be
@@ -99,20 +156,30 @@ set_property used_in_implementation false [get_files -all {{c:/Users/Bklolo/Desk
 foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
   set_property used_in_implementation false $dcp
 }
-read_xdc {{C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/constrs_1/imports/Vivado_Project/Constraints.xdc}}
-set_property used_in_implementation false [get_files {{C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/constrs_1/imports/Vivado_Project/Constraints.xdc}}]
+read_xdc C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/constrs_1/imports/Vivado_Project/Constraints.xdc
+set_property used_in_implementation false [get_files C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.srcs/constrs_1/imports/Vivado_Project/Constraints.xdc]
 
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 set_param ips.enableIPCacheLiteLoad 1
 close [open __synthesis_is_running__ w]
 
+OPTRACE "synth_design" START { }
 synth_design -top zybo_top -part xc7z020clg400-1
+OPTRACE "synth_design" END { }
+if { [get_msg_config -count -severity {CRITICAL WARNING}] > 0 } {
+ send_msg_id runtcl-6 info "Synthesis results are not added to the cache due to CRITICAL_WARNING"
+}
 
 
+OPTRACE "write_checkpoint" START { CHECKPOINT }
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
 write_checkpoint -force -noxdef zybo_top.dcp
+OPTRACE "write_checkpoint" END { }
+OPTRACE "synth reports" START { REPORT }
 create_report "synth_1_synth_report_utilization_0" "report_utilization -file zybo_top_utilization_synth.rpt -pb zybo_top_utilization_synth.pb"
+OPTRACE "synth reports" END { }
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]
+OPTRACE "synth_1" END { }

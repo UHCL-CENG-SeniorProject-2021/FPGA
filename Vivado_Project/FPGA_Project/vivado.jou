@@ -1,13 +1,12 @@
 #-----------------------------------------------------------
-# Vivado v2019.2 (64-bit)
-# SW Build 2708876 on Wed Nov  6 21:40:23 MST 2019
-# IP Build 2700528 on Thu Nov  7 00:09:20 MST 2019
-# Start of session at: Sat Jul 31 16:15:21 2021
-# Process ID: 5420
-# Current directory: C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent14820 C:\Users\Bklolo\Desktop\school\UHCL\2021\Spring\Senior Project I\FPGA\Vivado_Project\FPGA_Project\FPGA_Project.xpr
-# Log file: C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/vivado.log
-# Journal file: C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project\vivado.jou
-#-----------------------------------------------------------
-start_gui
-open_project {C:/Users/Bklolo/Desktop/school/UHCL/2021/Spring/Senior Project I/FPGA/Vivado_Project/FPGA_Project/FPGA_Project.xpr}
+# Vivado v2020.2 (64-bit)
+# SW Build 3064766 on Wed Nov 18 09:12:45 MST 2020
+# IP Build 3064653 on Wed Nov 18 14:17:31 MST 2020
+# Start of session at: Sun Aug  1 18:34:03 2021
+# Process ID: 10148
+# Current directory: C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent4796 C:\Users\brand\Desktop\john\FPGA\Vivado_Project\FPGA_Project\FPGA_Project.xpr
+# Log file: C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project/vivado.log
+# Journal file: C:/Users/brand/Desktop/john/FPGA/Vivado_Project/FPGA_Project\vivado.jou
+#-----------------------------------------------------------start_gui
+o

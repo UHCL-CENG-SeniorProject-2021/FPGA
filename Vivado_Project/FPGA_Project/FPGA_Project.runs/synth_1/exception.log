@@ -1,4 +1,0 @@
-ERROR: Exception caught trying to open file C:\Users\Bklolo\Desktop\school\UHCL\2021\Spring\Senior Project I\FPGA\Vivado_Project\FPGA_Project\FPGA_Project.runs\synth_1/runme.log
-	Exception name: Error
-	Exception error code: 70
-	Exception message: Permission denied

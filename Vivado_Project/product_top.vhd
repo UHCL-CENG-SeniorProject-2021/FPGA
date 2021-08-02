@@ -69,34 +69,34 @@ architecture v1 of product_top is
             iSck: in std_logic;
             iCsn: in std_logic;
             iMiso: in std_logic;
-            oMosi: out std_logic;
+            oMosi: out std_logic
 
             -- i2c
-            iSda: in std_logic;
-            oSda_e: out std_logic;
-            oSda: out std_logic;
-            iScl: in std_logic;
-            oScl_e: out std_logic;
-            oScl: out std_logic;
+--            iSda: in std_logic;
+--            oSda_e: out std_logic;
+--            oSda: out std_logic;
+--            iScl: in std_logic;
+--            oScl_e: out std_logic;
+--            oScl: out std_logic;
 
         -- SSM2603 (audio chip on zybo)
             -- audio control i2c
-            oSclk: out std_logic;
-            iSdin: in std_logic;
-            oSdin_e: out std_logic;
-            oSdin: out std_logic;
+--            oSclk: out std_logic;
+--            iSdin: in std_logic;
+--            oSdin_e: out std_logic;
+--            oSdin: out std_logic;
 
             -- misc/system
-            oMute: out std_logic;
+--            oMute: out std_logic;
 
         -- internals
-            iNd: in std_logic;
-            iData: in std_logic_vector (cW-1 downto 0);
-            oAck: out std_logic;
+--            iNd: in std_logic;
+--            iData: in std_logic_vector (cW-1 downto 0);
+--            oAck: out std_logic;
 
-            oNd: out std_logic;
-            oData: out std_logic_vector (cW-1 downto 0);
-            iAck: in std_logic
+--            oNd: out std_logic;
+--            oData: out std_logic_vector (cW-1 downto 0);
+--            iAck: in std_logic
         );
     end component;
 
@@ -154,34 +154,34 @@ begin
             iSck => iSck,
             iCsn => iCsn,
             oMosi => oMosi,
-            iMiso => iMiso,
+            iMiso => iMiso
 
             -- i2c
-            iSda => iSda,
-            oSda_e => oSda_e,
-            oSda => oSda,
-            iScl => iScl,
-            oScl_e => oScl_e,
-            oScl => oScl,
+   --         iSda => iSda,
+   --         oSda_e => oSda_e,
+   --         oSda => oSda,
+   --         iScl => iScl,
+   --         oScl_e => oScl_e,
+   --         oScl => oScl,
 
         -- SSM2603
             -- audio control i2c
-            oSclk => oSclk,
-            iSdin => iSdin,
-            oSdin_e => oSdin_e,
-            oSdin => oSdin,
+--            oSclk => oSclk,
+--            iSdin => iSdin,
+--            oSdin_e => oSdin_e,
+--            oSdin => oSdin,
 
             -- misc/system
-            oMute => oMute,
+--            oMute => oMute,
 
         -- internals
-            iNd => sNd_tx,
-            iData => sData_tx,
-            oAck => sAck_tx,
+--            iNd => sNd_tx,
+--            iData => sData_tx,
+--            oAck => sAck_tx,
 
-            oNd => sNd_rx,
-            oData => sData_rx,
-            iAck => sAck_rx
+--            oNd => sNd_rx,
+--            oData => sData_rx,
+--            iAck => sAck_rx
         );
 
     i2s_ctrl_inst: i2s_ctrl

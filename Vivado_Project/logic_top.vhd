@@ -23,8 +23,8 @@ entity logic_top is
          --SPI
         iSck: in std_logic;
         iCsn: in std_logic;
-        iMosi: in std_logic;
-        oMiso: out std_logic;
+        iMiso: in std_logic;
+        oMosi: out std_logic;
 
         -- Debug UART
         iUart_dbg: in std_logic;
@@ -91,8 +91,8 @@ begin
 
     sSPIi.sck <= iSck;
     sSPIi.spisel <= iCsn;
-    sSPIi.mosi <= iMosi;
-    oMiso <= sSPIo.miso;
+    sSPIi.miso <= iMiso;
+    oMosi <= sSPIo.mosi;
 
     sUART_dbg_i.rxd <= iUart_dbg;
     oUart_dbg <= sUART_dbg_o.txd;

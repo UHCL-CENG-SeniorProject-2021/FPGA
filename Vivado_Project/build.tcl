@@ -35,7 +35,7 @@ set_property -name "xpm_libraries" -value "XPM_CDC" -objects $obj
 
 
 add_files [glob ${origin_dir}/*.vhd]
-add_files [glob ${origin_dir}/clk_wiz_0/*.xci]
+add_files [glob ${origin_dir}/ip/*.xci]
 
 #
 # Sources
@@ -53,7 +53,7 @@ set_property -name "top" -value "zybo_top" -objects $obj
 set obj [get_filesets constrs_1]
 
 # Add/Import constrs file and set constrs file properties
-set file "[file normalize "$origin_dir/Constraints.xdc"]"
+set file "[file normalize "$origin_dir/constraints/Constraints.xdc"]"
 puts $file
 set file_imported [import_files -fileset constrs_1 [list $file]]
 puts $file_imported

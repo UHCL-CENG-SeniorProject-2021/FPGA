@@ -7,8 +7,8 @@ entity zybo_top is
     port (
 --------------------------------------------
 -- system signals
-        iCLK: in std_logic;
-        iRESET: in std_logic;
+        iCLK: in std_logic;     -- FPGA clock
+        iRESET: in std_logic;   -- FPGA reset
 --------------------------------------------
 -- rpi comms
 
@@ -31,22 +31,22 @@ entity zybo_top is
 -- allows for stereo record and playback at sample rates from 8 kHz to 96 kHz.
 
 
--- BCLK     IÂ²S (Serial Clock)      Output         R19
--- PBDAT    IÂ²S (Playback Data)     Output         R18
--- PBLRC    IÂ²S (Playback Channel   Output         T19
--- 				Clock)
--- RECDAT   IÂ²S (Record Data)       Input          R16
--- RECLRC   IÂ²S (Record Channel     Output         Y18
---			 	Clock)
--- SDIN     IÂ²C (Data)              Input/Output   N17
--- SCLK     IÂ²C (Clock)             Output         N18
+-- BCLK     I²S (Serial Clock)      Output         R19
+-- PBDAT    I²S (Playback Data)     Output         R18
+-- PBLRC    I²S (Playback Channel   Output         T19
+-- Clock)
+-- RECDAT   I²S (Record Data)       Input          R16
+-- RECLRC   I²S (Record Channel     Output         Y18
+-- Clock)
+-- SDIN     I²C (Data)              Input/Output   N17
+-- SCLK     I²C (Clock)             Output         N18
 -- MUTE     Digital Enable (Active  Output         P18
 --          Low)
 -- MCLK     Master Clock            Output         R17
 
         -- i2s: 2 channels sampled @ BCLK
         oBCLK: out std_logic; -- i2s clock
-		
+
         -- playback channel
         oPBDAT: out std_logic; -- i2s playback data
         oPBLRC: out std_logic; -- i2s playback left-right signal
@@ -60,16 +60,17 @@ entity zybo_top is
 
         -- misc/system
         oMUTE: out std_logic;
-        oMCLK: out std_logic
+        oMCLK: out std_logic;
+        LED: out std_logic;
+        LED_Reset: out std_logic        
     ); -- END PORT
-	
-    -- TODO: define pinout (1st task)
+
     attribute loc: string;
-    attribute loc of iCLK: 	  signal is "K17";  -- 125 MHz pin
+    attribute loc of iCLK:  signal is "K17";  -- 125 MHz pin
     attribute loc of iUART:   signal is "V12";  -- Std Pmod JE pg29 z7RM
     attribute loc of oUART:   signal is "W16";
-    attribute loc of iSCK: 	  signal is "V15";
-    attribute loc of iCSN: 	  signal is "W15";
+    attribute loc of iSCK:  signal is "V15";
+    attribute loc of iCSN:  signal is "W15";
     attribute loc of oMISO:   signal is "T11";
     attribute loc of iMOSI:   signal is "T10";
     attribute loc of ioSDA:   signal is "W14";
@@ -85,6 +86,11 @@ entity zybo_top is
     attribute loc of oSCLK:   signal is "N18";
     attribute loc of oMUTE:   signal is "P18";
     attribute loc of oMCLK:   signal is "R17";
+    attribute loc of LED:     signal is "M14";          -- LEDs to debug UART
+    attribute loc of LED_Reset: signal is "M15";
+   
+    signal count_sig: std_logic_vector(23 downto 0);
+   
 end entity;
 
 architecture v1 of zybo_top is
@@ -141,7 +147,7 @@ architecture v1 of zybo_top is
         );
     end component;
 
-    component zybo_glue -- 2nd task 
+    component zybo_glue -- 2nd task
         port (
             -- clocks
             iCLK: in std_logic;
@@ -159,6 +165,14 @@ architecture v1 of zybo_top is
             ioIO_pins: inout std_logic_vector
         );
     end component;
+   
+    component counter
+        port(
+            cout   :out std_logic_vector (23 downto 0);
+            clk    :in  std_logic;
+            reset  :in  std_logic
+        );
+        end component;
 
     signal sIO_idata: std_logic_vector (cIO_n-1 downto 0);
     signal sIO_en: std_logic_vector (cIO_n-1 downto 0);
@@ -238,5 +252,14 @@ begin
             ioIO_pins(1) => ioSCL,
             ioIO_pins(2) => ioSDIN
         );
-
+       
+        cnt: counter
+        port map(
+            cout => count_sig,  -- core
+            clk => iCLK,
+            reset => '1'
+        );
+        LED <= count_sig(23);
+        LED_Reset <= sReset_core;
+       
 end v1;

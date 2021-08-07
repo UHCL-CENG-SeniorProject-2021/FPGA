@@ -17,7 +17,7 @@ entity logic_top is
         iReset: in std_logic;
 
         -- UART
-        iUart: in std_logic;
+        iUart: in std_logic := '1';
         oUart: out std_logic;
 
          --SPI
@@ -30,7 +30,7 @@ entity logic_top is
         iUart_dbg: in std_logic;
         oUart_dbg: out std_logic;
 
-        iGPIO: in std_logic_vector (8 downto 0);
+        iGPIO: in std_logic_vector (8 downto 0) := (others=>'0');
         oGPIO: out std_logic
     );
 end logic_top;

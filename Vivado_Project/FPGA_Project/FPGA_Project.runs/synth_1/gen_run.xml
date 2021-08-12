@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1628752098">
+  <File Type="PA-TCL" Name="test_top.tcl"/>
+  <File Type="RDS-PROPCONSTRS" Name="test_top_drc_synth.rpt"/>
+  <File Type="REPORTS-TCL" Name="test_top_reports.tcl"/>
+  <File Type="RDS-RDS" Name="test_top.vds"/>
+  <File Type="RDS-UTIL" Name="test_top_utilization_synth.rpt"/>
+  <File Type="RDS-UTIL-PB" Name="test_top_utilization_synth.pb"/>
+  <File Type="RDS-DCP" Name="test_top.dcp"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="test_top_timing_summary_synth.rpt"/>
+  <File Type="VDS-TIMING-PB" Name="test_top_timing_summary_synth.pb"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/version.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/stdlib.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/config_types.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/config.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/amba.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/devices.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/stdio.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/stdlib/testlib.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/ahbctrl.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/ahbmst.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/gencomp/gencomp.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/misc/misc.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/uart.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/libdcom.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/ahbuart.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/alltech/allmem.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/apbctrl.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/grlib/amba/apbctrlx.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="grlib"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/apbuart.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/dcom.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/uart/dcom_uart.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/misc/grgpio.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/leon3/leon3.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/spi/spi.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/inferred/memory_inferred.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/maps/memrwcol.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/gencomp/netcomp.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/misc/rstgen.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/spi/spictrl.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/maps/spictrl_net.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/spi/spictrlx.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/maps/syncram_2p.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/test_top.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../logic_top.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../product_top.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../zybo_glue.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../zybo_top.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../counter.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/maps/syncram.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/techmap/maps/syncrambw.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="techmap"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/misc/ahbram.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/misc/ahbstat.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib-main/lib/gaisler/irqmp/irqmp.vhd">
+      <FileInfo>
+        <Attr Name="Library" Val="gaisler"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PPRDIR/../grlib_tester.vhd">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="test_top"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <File Path="$PSRCDIR/constrs_1/imports/constraints/Constraints.xdc">
+      <FileInfo>
+        <Attr Name="UserDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../constraints/Constraints.xdc"/>
+        <Attr Name="ImportTime" Val="1628456374"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/constrs_1/new/Constraints2.xdc">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2019"/>
+    <Step Id="synth_design"/>
+  </Strategy>
+  <BlockFileSet Type="BlockSrcs" Name="clk_wiz_0"/>
+</GenRun>

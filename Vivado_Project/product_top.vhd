@@ -2,7 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity product_top is
-
     port (
     -- system signals
         iClk_core: in std_logic;
@@ -10,7 +9,6 @@ entity product_top is
         iClk_i2s: in std_logic;
         iReset_i2s: in std_logic;
 
-    -- rpi comms
         -- uart
         iUart: in std_logic;
         oUart: out std_logic;
@@ -146,9 +144,7 @@ begin
             iClk => iClk_core,
             iReset => iReset_core,
 
-        -- rpi comms
             -- uart
-           
             iUart_dbg => iUart,
             oUart_dbg => oUart,
 

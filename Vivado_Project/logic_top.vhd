@@ -17,20 +17,20 @@ entity logic_top is
         iReset: in std_logic;
 
         -- UART
-        iUart: in std_logic := '1';
+        iUart: in std_logic;-- := '1';
         oUart: out std_logic;
 
          --SPI
         iSck: in std_logic;
         iCsn: in std_logic;
-        oMiso: out std_logic;
         iMosi: in std_logic;
+        oMiso: out std_logic;
 
         -- Debug UART
         iUart_dbg: in std_logic;
         oUart_dbg: out std_logic;
 
-        iGPIO: in std_logic_vector (8 downto 0) := (others=>'0');
+        iGPIO: in std_logic_vector (8 downto 0);-- := (others=>'0');
         oGPIO: out std_logic
     );
 end logic_top;

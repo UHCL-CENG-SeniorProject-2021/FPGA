@@ -1,35 +1,5 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 08/11/2021 11:50:38 PM
--- Design Name: 
--- Module Name: test_top - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
-
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity test_top is
     port (
@@ -72,24 +42,26 @@ component grlib_tester is
 end component;
 
 begin
-test_GRLIB: if(not test_UART)
-    generate begin
-tester: grlib_tester port map(
-    iClk=>iClk, 
-    iReset => '1',
-    iRs_dbg=>iRs,
-    oRs_dbg=>oRs,
-    oGPIO=>oGPIO,
-    iRs=>'1',
-    iSck=>'1',
-    iCsn=>'1',
-    iGPIO=>(others=>'0'),
-    iMosi=>'1'    
-    ); end generate;
+
+    test_GRLIB: if(not test_UART)
+        generate begin
+    tester: grlib_tester port map(
+        iClk=>iClk, 
+        iReset => '1',
+        iRs_dbg=>iRs,
+        oRs_dbg=>oRs,
+        oGPIO=>oGPIO,
+        iRs=>'1',
+        iSck=>'1',
+        iCsn=>'1',
+        iGPIO=>(others=>'0'),
+        iMosi=>'1'    
+        ); end generate;
     
     UART_test: if(test_UART)
         generate begin
         oRs<=iRs;
         oGPIO<='1';
         end generate;
+
 end Behavioral;

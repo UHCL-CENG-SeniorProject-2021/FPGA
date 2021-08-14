@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1628752098">
+<GenRun Id="synth_1" LaunchPart="xc7z020clg400-1" LaunchTime="1628877728">
   <File Type="PA-TCL" Name="test_top.tcl"/>
   <File Type="RDS-PROPCONSTRS" Name="test_top_drc_synth.rpt"/>
   <File Type="REPORTS-TCL" Name="test_top_reports.tcl"/>
@@ -335,6 +335,7 @@
       </FileInfo>
     </File>
     <Config>
+      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/Constraints2.xdc"/>
       <Option Name="ConstrsType" Val="XDC"/>
     </Config>
   </FileSet>

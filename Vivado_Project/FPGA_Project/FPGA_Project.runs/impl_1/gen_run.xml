@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1628752098">
+<GenRun Id="impl_1" LaunchPart="xc7z020clg400-1" LaunchTime="1628877847">
   <File Type="BITSTR-BMM" Name="test_top_bd.bmm"/>
   <File Type="OPT-METHODOLOGY-DRC" Name="test_top_methodology_drc_opted.rpt"/>
   <File Type="INIT-TIMING" Name="test_top_timing_summary_init.rpt"/>
@@ -401,6 +401,7 @@
       </FileInfo>
     </File>
     <Config>
+      <Option Name="TargetConstrsFile" Val="$PSRCDIR/constrs_1/new/Constraints2.xdc"/>
       <Option Name="ConstrsType" Val="XDC"/>
     </Config>
   </FileSet>

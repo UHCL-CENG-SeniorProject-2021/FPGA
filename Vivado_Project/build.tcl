@@ -75,23 +75,20 @@ read_vhdl -library grlib $GRLIB_SET
 read_vhdl -library techmap $TECHMAP_SET
 read_vhdl -library gaisler $GAISLER_SET
 
-#read_vhdl -library work [ glob ${origin_dir}/*.vhd]
+# Add all .vhd and .xci in origin to project
 add_files [glob ${origin_dir}/*.vhd]
 add_files [glob ${origin_dir}/ip/*.xci]
 
-
-# Set 'sources_1' fileset properties
+# Set 'sources_1' fileset properties and set project "top"
 set obj [get_filesets sources_1]
-set_property -name "top" -value "zybo_top" -objects $obj
+#set_property -name "top" -value "zybo_top" -objects $obj
+set_property -name "top" -value "test_top" -objects $obj
 
 #
 # Constraints
 #
 
-# Set 'constrs_1' fileset object
+# Set 'constrs_1' fileset properties and add Constraints.xdc
 set obj [get_filesets constrs_1]
-
-# Add/Import constrs file and set constrs file properties
-set file "[file normalize "$origin_dir/constraints/Constraints.xdc"]"
-set file_imported [import_files -fileset constrs_1 [list $file]]
+add_files -fileset constrs_1 "$origin_dir/constraints/Constraints.xdc"
 set_property -name "target_constrs_file" -value "[get_files Constraints.xdc]" -objects $obj

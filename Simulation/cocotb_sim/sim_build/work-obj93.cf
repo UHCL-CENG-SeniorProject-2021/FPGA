@@ -2,3 +2,6 @@ v 4
 file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../hw_tester/src/hdl/wraps/logic_top.vhd" "7fa1ffda94b34a79115fbc3edeec9520919a89f3" "20210911013707.402":
   entity logic_top at 1( 0) + 0 on 11;
   architecture logic_top_arc of logic_top at 38( 688) + 0 on 12;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/test_top.vhd" "b3965e655006f527bab431351051dab8d968d4f3" "20210911222715.123":
+  entity test_top at 1( 0) + 0 on 13;
+  architecture behavioral of test_top at 25( 518) + 0 on 14;

@@ -1,3 +1,3 @@
 #!/bin/bash
 
-export PYTHONPATH=$PYTHONPATH:/home/blovatt/Desktop/Senior_Project/FPGA/cocotb_helper/
+export PYTHONPATH=$PYTHONPATH:/home/$user/Desktop/Senior_Project/FPGA/Simulation/cocotb_helper/

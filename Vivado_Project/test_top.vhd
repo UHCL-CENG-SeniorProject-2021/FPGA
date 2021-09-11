@@ -1,24 +1,3 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date: 08/11/2021 11:50:38 PM
--- Design Name: 
--- Module Name: test_top - Behavioral
--- Project Name: 
--- Target Devices: 
--- Tool Versions: 
--- Description: 
--- 
--- Dependencies: 
--- 
--- Revision:
--- Revision 0.01 - File Created
--- Additional Comments:
--- 
-----------------------------------------------------------------------------------
-
-
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
@@ -47,7 +26,7 @@ architecture Behavioral of test_top is
 
 constant test_UART: boolean := false;
 
-component grlib_tester is
+component logic_top is
     port (
         iClk: in std_logic;
         iReset: in std_logic;
@@ -74,7 +53,7 @@ end component;
 begin
 test_GRLIB: if(not test_UART)
     generate begin
-tester: grlib_tester port map(
+tester: logic_top port map(
     iClk=>iClk, 
     iReset => '1',
     iRs_dbg=>iRs,

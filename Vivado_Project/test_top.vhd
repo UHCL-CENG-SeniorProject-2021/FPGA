@@ -47,7 +47,7 @@ architecture Behavioral of test_top is
 
 constant test_UART: boolean := false;
 
-component grlib_tester is
+component logic_top is
     port (
         iClk: in std_logic;
         iReset: in std_logic;
@@ -74,7 +74,7 @@ end component;
 begin
 test_GRLIB: if(not test_UART)
     generate begin
-tester: grlib_tester port map(
+tester: logic_top port map(
     iClk=>iClk, 
     iReset => '1',
     iRs_dbg=>iRs,

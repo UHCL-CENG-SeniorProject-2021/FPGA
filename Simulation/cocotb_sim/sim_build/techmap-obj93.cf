@@ -1,0 +1,26 @@
+v 4
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/maps/syncram_2p.vhd" "b470187aed5442486ca43b6f072f4eca6ad19706" "20210911013714.235":
+  entity syncram_2p at 27( 1308) + 0 on 14;
+  architecture rtl of syncram_2p at 55( 2235) + 0 on 15;
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/maps/memrwcol.vhd" "4c2e0eba052f0a0fe50b48f5267275ae99001299" "20210911013714.922":
+  entity memrwcol at 27( 1333) + 0 on 16;
+  architecture rtl of memrwcol at 65( 2447) + 0 on 17;
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/alltech/allmem.vhd" "09a5d61f3454302fb9613fb0a34e7571adda1c84" "20210911013714.134":
+  package allmem at 27( 1284) + 0 on 13;
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/inferred/memory_inferred.vhd" "f366595262af058bcc9a553f9b33d3f0bdb2b571" "20210911013715.031":
+  entity generic_syncram at 27( 1296) + 0 on 18;
+  architecture behavioral of generic_syncram at 44( 1820) + 0 on 19;
+  entity generic_syncram_reg at 79( 2608) + 0 on 20;
+  architecture behavioral of generic_syncram_reg at 95( 3060) + 0 on 21;
+  entity generic_syncram_2p at 132( 3934) + 0 on 22;
+  architecture behav of generic_syncram_2p at 157( 4535) + 0 on 23;
+  entity generic_syncram_2p_reg at 214( 5911) + 0 on 24;
+  architecture behav of generic_syncram_2p_reg at 237( 6457) + 0 on 25;
+  entity generic_regfile_3p at 283( 7719) + 0 on 26;
+  architecture rtl of generic_regfile_3p at 310( 8659) + 0 on 27;
+  entity generic_regfile_4p at 384( 10484) + 0 on 28;
+  architecture rtl of generic_regfile_4p at 417( 11685) + 0 on 29;
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/gencomp/gencomp.vhd" "6a4d2443f6e35181e4604924b938e913986eab0d" "20210911013706.408":
+  package gencomp at 27( 1298) + 0 on 11;
+file "/home/blovatt/Desktop/Senior_Project/4o/gsp/cocotb_sim/" "../grlib/lib/techmap/gencomp/netcomp.vhd" "1ee3d4e8289ad9f13db5123941a82ace08c8fa97" "20210911013710.093":
+  package netcomp at 27( 1311) + 0 on 12;

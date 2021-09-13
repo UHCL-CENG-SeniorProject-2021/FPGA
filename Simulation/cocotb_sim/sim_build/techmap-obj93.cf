@@ -1,35 +1,35 @@
 v 4
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/gencomp/netcomp.vhd" "1ee3d4e8289ad9f13db5123941a82ace08c8fa97" "20210911222713.358":
-  package netcomp at 27( 1311) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/gencomp/gencomp.vhd" "6a4d2443f6e35181e4604924b938e913986eab0d" "20210911222716.807":
-  package gencomp at 27( 1298) + 0 on 11;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/inferred/memory_inferred.vhd" "f366595262af058bcc9a553f9b33d3f0bdb2b571" "20210911222713.372":
-  entity generic_syncram at 27( 1296) + 0 on 4;
-  architecture behavioral of generic_syncram at 44( 1820) + 0 on 4;
-  entity generic_syncram_reg at 79( 2608) + 0 on 4;
-  architecture behavioral of generic_syncram_reg at 95( 3060) + 0 on 4;
-  entity generic_syncram_2p at 132( 3934) + 0 on 4;
-  architecture behav of generic_syncram_2p at 157( 4535) + 0 on 4;
-  entity generic_syncram_2p_reg at 214( 5911) + 0 on 4;
-  architecture behav of generic_syncram_2p_reg at 237( 6457) + 0 on 4;
-  entity generic_regfile_3p at 283( 7719) + 0 on 4;
-  architecture rtl of generic_regfile_3p at 310( 8659) + 0 on 4;
-  entity generic_regfile_4p at 384( 10484) + 0 on 4;
-  architecture rtl of generic_regfile_4p at 417( 11685) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/alltech/allmem.vhd" "09a5d61f3454302fb9613fb0a34e7571adda1c84" "20210911222713.387":
-  package allmem at 27( 1284) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/memrwcol.vhd" "4c2e0eba052f0a0fe50b48f5267275ae99001299" "20210911222713.395":
-  entity memrwcol at 27( 1333) + 0 on 4;
-  architecture rtl of memrwcol at 65( 2447) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncram_2p.vhd" "b470187aed5442486ca43b6f072f4eca6ad19706" "20210911222713.397":
-  entity syncram_2p at 27( 1308) + 0 on 4;
-  architecture rtl of syncram_2p at 55( 2235) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncram.vhd" "e456121a12caba27c26a1ffc7147c1a7172c94da" "20210911222713.399":
-  entity syncram at 27( 1302) + 0 on 4;
-  architecture rtl of syncram at 52( 2081) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncrambw.vhd" "94fcdd3f60b62ef702ef4d7de5296501e52a3b1b" "20210911222713.399":
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/spictrl_net.vhd" "718796977e6b8e634b2a805469f5252d0b6f1b1b" "20210913061654.168":
+  entity spictrl_net at 27( 1321) + 0 on 13;
+  architecture rtl of spictrl_net at 86( 3340) + 0 on 14;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncrambw.vhd" "94fcdd3f60b62ef702ef4d7de5296501e52a3b1b" "20210913061644.891":
   entity syncrambw at 28( 1336) + 0 on 4;
   architecture rtl of syncrambw at 53( 2179) + 0 on 4;
-file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/spictrl_net.vhd" "718796977e6b8e634b2a805469f5252d0b6f1b1b" "20210911222713.400":
-  entity spictrl_net at 27( 1321) + 0 on 4;
-  architecture rtl of spictrl_net at 86( 3340) + 0 on 4;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncram.vhd" "e456121a12caba27c26a1ffc7147c1a7172c94da" "20210913061644.891":
+  entity syncram at 27( 1302) + 0 on 4;
+  architecture rtl of syncram at 52( 2081) + 0 on 4;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/syncram_2p.vhd" "b470187aed5442486ca43b6f072f4eca6ad19706" "20210913061654.334":
+  entity syncram_2p at 27( 1308) + 0 on 16;
+  architecture rtl of syncram_2p at 55( 2235) + 0 on 17;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/maps/memrwcol.vhd" "4c2e0eba052f0a0fe50b48f5267275ae99001299" "20210913061655.047":
+  entity memrwcol at 27( 1333) + 0 on 18;
+  architecture rtl of memrwcol at 65( 2447) + 0 on 19;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/alltech/allmem.vhd" "09a5d61f3454302fb9613fb0a34e7571adda1c84" "20210913061654.226":
+  package allmem at 27( 1284) + 0 on 15;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/inferred/memory_inferred.vhd" "f366595262af058bcc9a553f9b33d3f0bdb2b571" "20210913061655.160":
+  entity generic_syncram at 27( 1296) + 0 on 20;
+  architecture behavioral of generic_syncram at 44( 1820) + 0 on 21;
+  entity generic_syncram_reg at 79( 2608) + 0 on 22;
+  architecture behavioral of generic_syncram_reg at 95( 3060) + 0 on 23;
+  entity generic_syncram_2p at 132( 3934) + 0 on 24;
+  architecture behav of generic_syncram_2p at 157( 4535) + 0 on 25;
+  entity generic_syncram_2p_reg at 214( 5911) + 0 on 26;
+  architecture behav of generic_syncram_2p_reg at 237( 6457) + 0 on 27;
+  entity generic_regfile_3p at 283( 7719) + 0 on 28;
+  architecture rtl of generic_regfile_3p at 310( 8659) + 0 on 29;
+  entity generic_regfile_4p at 384( 10484) + 0 on 30;
+  architecture rtl of generic_regfile_4p at 417( 11685) + 0 on 31;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/gencomp/gencomp.vhd" "6a4d2443f6e35181e4604924b938e913986eab0d" "20210913061646.086":
+  package gencomp at 27( 1298) + 0 on 11;
+file "/home/blovatt/Desktop/Senior_Project/FPGA/Simulation/cocotb_sim/" "../../Vivado_Project/grlib-main/lib/techmap/gencomp/netcomp.vhd" "1ee3d4e8289ad9f13db5123941a82ace08c8fa97" "20210913061649.960":
+  package netcomp at 27( 1311) + 0 on 12;

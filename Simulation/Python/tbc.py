@@ -14,7 +14,7 @@ from ahbuart import ahbuart
 
 @cocotb.test()
 async def uart_test0(dut):
-    u = uart(rx = dut.oRs_dbg, tx = dut.iRs_dbg, verbose = False)
+    u = uart(rx = dut.oRs, tx = dut.iRs, verbose = False)
     u = ahbuart(u)
     cocotb.fork(Clock(dut.iClk, 20, 'ns').start())
     dut.iGpio <= 0x1FF

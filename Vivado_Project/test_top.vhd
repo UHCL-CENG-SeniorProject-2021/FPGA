@@ -12,12 +12,14 @@ use IEEE.STD_LOGIC_1164.ALL;
 
 entity test_top is
     port (
-        iClk: in std_logic;
+----------------system signals--------------
+        iCLK: in std_logic;     -- FPGA clock
+        iRESET: in std_logic;   -- FPGA reset
 
         -- UART
         iRs: in std_logic;
         oRs: out std_logic;
-
+        iGPIO: out std_logic;
         oGPIO: out std_logic
     );
 end test_top;
@@ -42,8 +44,8 @@ component logic_top is
         oMiso: out std_logic;
 
         -- Debug UART
-        iRs_dbg: in std_logic;
-        oRs_dbg: out std_logic;
+        iUART_dbg: in std_logic;
+        oUART_dbg: out std_logic;
 
         iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
@@ -55,9 +57,9 @@ test_GRLIB: if(not test_UART)
     generate begin
 tester: logic_top port map(
     iClk=>iClk, 
-    iReset => '1',
-    iRs_dbg=>iRs,
-    oRs_dbg=>oRs,
+    iReset => iRESET,
+    iUART_dbg=>iRs,
+    oUART_dbg=>oRs,
     oGPIO=>oGPIO,
     iRs=>'1',
     iSck=>'1',

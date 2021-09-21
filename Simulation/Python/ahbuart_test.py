@@ -3,7 +3,7 @@ import cocotb
 
 def ahbuart_test(u):
     print("writing")
-    u.write(0x80000004, [0xFFFFFFFF, 0])
+    u.write(0x80000004, [0xFFFFFFFF, 0])    # can push Mute to codec, get/set data on audio chip, etc 
     print("reading")
     d = u.read(0x80000000, 2)
     print(d)

@@ -17,7 +17,7 @@ entity logic_top is
         iReset: in std_logic;
 
         -- UART
-        iUart: in std_logic;-- := '1';
+        iUart: in std_logic := '1';
         oUart: out std_logic;
 
          --SPI
@@ -30,7 +30,7 @@ entity logic_top is
         iUart_dbg: in std_logic;
         oUart_dbg: out std_logic;
 
-        iGPIO: in std_logic_vector (8 downto 0);-- := (others=>'0');
+        iGPIO: in std_logic_vector (8 downto 0) := (others=>'0');
         oGPIO: out std_logic
     );
 end logic_top;
@@ -44,7 +44,7 @@ architecture logic_top_arc of logic_top is
 
     ----------- AMBA AHB Masters Indeces
     constant cINDEX_AHBM_UART_DBG: integer := 0;
-    constant cAHB_mst_num: integer := 1;
+    constant cAHB_mst_num: integer := 2;    -- UART, SPI
 
     ---------------- AMBA AHB Slaves Indeces
     constant cINDEX_AHBS_APBCTRL: integer := 0;
@@ -182,20 +182,38 @@ begin
             gpioo => sGPIOo
         );
 
-    -- SPI
-    spi: spictrl
+    -- SPI    -- TODO: define constants
+    spi_ahb: spi2ahb
         generic map (
-            pindex => cINDEX_APB_SPI,
-            paddr => cINDEX_APB_SPI
+   -- AHB Configuration
+           hindex => 1,
+           -- ahb address hi/lo (can restrict access to memory)
+           ahbaddrh => 0,   -- define constants 
+           ahbaddrl => 0,
+           -- ahb mask hi/lo
+           ahbmaskh => 0,
+           ahbmaskl => 0,
+           -- TODO: which enable pin sets tri-state iobuf (zybo)
+           --       check active level / polarity
+           oepol => 0,
+           -- filters noise, set high and adjust accordingly (decrease)
+           -- Rpi should start with lower speeds (lower than 100kHz)
+           filter => 2,
+           -- polarity of spi signal, should be same for fpga and pi
+           -- if we start to lose samples, check here to fix (may interfere with FIFO)
+           cpol => 0,
+           cpha => 0
         )
-        port map (
-            rstn => sReset_synch,
-            clk => iClk,
-            apbi => sAPBi,
-            apbo => sAPBo(cINDEX_APB_SPI),
-            spii => sSPIi,
-            spio => sSPIo
-        );
+         port map(
+           rstn => sReset_synch,
+           clk => iClk,
+           -- AHB master interface
+           ahbi => sAHBmi,
+           ahbo => sAHBmo(1), -- hindex
+           -- SPI signals
+           spii => sSPIi,
+       spio => sSPIo
+       );
 
     -- UART
     uart: apbuart

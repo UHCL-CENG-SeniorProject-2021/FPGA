@@ -31,11 +31,11 @@ entity product_top is
         -- i2s: 2 channels sampled @ BCLK
         oBclk: out std_logic; -- i2s clock
         -- playback channel
-        oPbdat: out std_logic; -- i2s playback data
-        oPblrc: out std_logic; -- i2s playback left-right signal
+--        oPbdat: out std_logic; -- i2s playback data
+--        oPblrc: out std_logic; -- i2s playback left-right signal
         -- record channel
-        oRecdat: out std_logic; -- i2s recorded data
-        oReclrc: out std_logic; -- i2s rec left-right signal
+--        oRecdat: out std_logic; -- i2s recorded data
+--        oReclrc: out std_logic; -- i2s rec left-right signal
 
         -- audio control i2c
         oSclk: out std_logic;
@@ -45,7 +45,10 @@ entity product_top is
 
         -- misc/system
         oMute: out std_logic;
-        oMclk: out std_logic
+        oMclk: out std_logic;
+        
+        -- LED
+        LED: out std_logic
     );
 end entity;
 
@@ -130,12 +133,12 @@ architecture v1 of product_top is
 --       );
 --    end component;
 
-    signal sNd_tx: std_logic;
-    signal sData_tx: std_logic_vector (cW-1 downto 0);
-    signal sAck_tx: std_logic;
-    signal sNd_rx: std_logic;
-    signal sData_rx: std_logic_vector (cW-1 downto 0);
-    signal sAck_rx: std_logic;
+--    signal sNd_tx: std_logic;
+--    signal sData_tx: std_logic_vector (cW-1 downto 0);
+--    signal sAck_tx: std_logic;
+--    signal sNd_rx: std_logic;
+--    signal sData_rx: std_logic_vector (cW-1 downto 0);
+--    signal sAck_rx: std_logic;
 
 begin
 
@@ -155,12 +158,12 @@ begin
             iMosi => iMosi,
 
             -- i2c
-   --         iSda => iSda,
-   --         oSda_e => oSda_e,
-   --         oSda => oSda,
-   --         iScl => iScl,
-   --         oScl_e => oScl_e,
-   --         oScl => oScl,
+--            iSda => iSda,
+--            oSda_e => oSda_e,
+--            oSda => oSda,
+--            iScl => iScl,
+--            oScl_e => oScl_e,
+--            oScl => oScl,
 
         -- SSM2603
             -- audio control i2c

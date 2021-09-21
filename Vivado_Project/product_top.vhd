@@ -2,7 +2,6 @@ library ieee;
 use ieee.std_logic_1164.all;
 
 entity product_top is
-
     port (
     -- system signals
         iClk_core: in std_logic;
@@ -10,7 +9,6 @@ entity product_top is
         iClk_i2s: in std_logic;
         iReset_i2s: in std_logic;
 
-    -- rpi comms
         -- uart
         iUart: in std_logic;
         oUart: out std_logic;
@@ -33,11 +31,11 @@ entity product_top is
         -- i2s: 2 channels sampled @ BCLK
         oBclk: out std_logic; -- i2s clock
         -- playback channel
-        oPbdat: out std_logic; -- i2s playback data
-        oPblrc: out std_logic; -- i2s playback left-right signal
+--        oPbdat: out std_logic; -- i2s playback data
+--        oPblrc: out std_logic; -- i2s playback left-right signal
         -- record channel
-        oRecdat: out std_logic; -- i2s recorded data
-        oReclrc: out std_logic; -- i2s rec left-right signal
+--        oRecdat: out std_logic; -- i2s recorded data
+--        oReclrc: out std_logic; -- i2s rec left-right signal
 
         -- audio control i2c
         oSclk: out std_logic;
@@ -161,12 +159,12 @@ end component;
 --       );
 --    end component;
 
-    signal sNd_tx: std_logic;
-    signal sData_tx: std_logic_vector (cW-1 downto 0);
-    signal sAck_tx: std_logic;
-    signal sNd_rx: std_logic;
-    signal sData_rx: std_logic_vector (cW-1 downto 0);
-    signal sAck_rx: std_logic;
+--    signal sNd_tx: std_logic;
+--    signal sData_tx: std_logic_vector (cW-1 downto 0);
+--    signal sAck_tx: std_logic;
+--    signal sNd_rx: std_logic;
+--    signal sData_rx: std_logic_vector (cW-1 downto 0);
+--    signal sAck_rx: std_logic;
 
 begin
     test: if(cTest)
@@ -208,12 +206,12 @@ begin
               iGPIO=>(others=>'0'),
               iMosi=>'1',
             -- i2c
-   --         iSda => iSda,
-   --         oSda_e => oSda_e,
-   --         oSda => oSda,
-   --         iScl => iScl,
-   --         oScl_e => oScl_e,
-   --         oScl => oScl,
+--            iSda => iSda,
+--            oSda_e => oSda_e,
+--            oSda => oSda,
+--            iScl => iScl,
+--            oScl_e => oScl_e,
+--            oScl => oScl,
 
         -- SSM2603
             -- audio control i2c

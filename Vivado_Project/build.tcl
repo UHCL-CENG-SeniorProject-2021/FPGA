@@ -56,6 +56,8 @@ set GAISLER_SET {
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spi.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrl.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrlx.vhd
+	../Vivado_Project/grlib-main/lib/gaisler/spi/spi2ahb.vhd
+	../Vivado_Project/grlib-main/lib/gaisler/spi/spi2ahbx.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/misc/grgpio.vhd
 }
 

@@ -23,23 +23,23 @@ entity zybo_top is
         iMOSI: in std_logic;
 
         -- i2c
-        ioSDA: inout std_logic;
-        ioSCL: inout std_logic;
+--        ioSDA: inout std_logic;
+--        ioSCL: inout std_logic;
 
 --------------------------------------------
 -- SSM2603 (on-board audio codec, pg22) device address: 0011010b
 -- allows for stereo record and playback at sample rates from 8 kHz to 96 kHz.
 
 
--- BCLK     I²S (Serial Clock)      Output         R19
--- PBDAT    I²S (Playback Data)     Output         R18
--- PBLRC    I²S (Playback Channel   Output         T19
+-- BCLK     IÂ²S (Serial Clock)      Output         R19
+-- PBDAT    IÂ²S (Playback Data)     Output         R18
+-- PBLRC    IÂ²S (Playback Channel   Output         T19
 -- Clock)
--- RECDAT   I²S (Record Data)       Input          R16
--- RECLRC   I²S (Record Channel     Output         Y18
+-- RECDAT   IÂ²S (Record Data)       Input          R16
+-- RECLRC   IÂ²S (Record Channel     Output         Y18
 -- Clock)
--- SDIN     I²C (Data)              Input/Output   N17
--- SCLK     I²C (Clock)             Output         N18
+-- SDIN     IÂ²C (Data)              Input/Output   N17
+-- SCLK     IÂ²C (Clock)             Output         N18
 -- MUTE     Digital Enable (Active  Output         P18
 --          Low)
 -- MCLK     Master Clock            Output         R17
@@ -73,8 +73,8 @@ entity zybo_top is
     attribute loc of iCSN:  signal is "W15";
     attribute loc of oMISO:   signal is "T11";
     attribute loc of iMOSI:   signal is "T10";
-    attribute loc of ioSDA:   signal is "W14";
-    attribute loc of ioSCL:   signal is "Y14";
+--    attribute loc of ioSDA:   signal is "W14";
+--    attribute loc of ioSCL:   signal is "Y14";
     -- pg 22: hph out(blk), mic in(pink), line in(blue): J5, J6, J7
     -- pins below located pg22 of Zybo RM
     attribute loc of oBCLK:   signal is "R19";
@@ -87,7 +87,7 @@ entity zybo_top is
     attribute loc of oMUTE:   signal is "P18";
     attribute loc of oMCLK:   signal is "R17";
 --    attribute loc of LED:     signal is "M14";          -- LEDs to debug UART
-    attribute loc of LED_Reset: signal is "M15";
+--    attribute loc of LED_Reset: signal is "M15";
    
     signal count_sig: std_logic_vector(23 downto 0);
    
@@ -127,13 +127,13 @@ architecture v1 of zybo_top is
 
         -- SSM2603
             -- i2s: 2 channels sampled @ BCLK
-            oBclk: out std_logic; -- i2s clock
-            -- playback channel
-            oPbdat: out std_logic; -- i2s playback data
-            oPblrc: out std_logic; -- i2s playback left-right signal
-            -- record channel
-            oRecdat: out std_logic; -- i2s recorded data
-            oReclrc: out std_logic; -- i2s rec left-right signal
+--            oBclk: out std_logic; -- i2s clock
+--            -- playback channel
+--            oPbdat: out std_logic; -- i2s playback data
+--            oPblrc: out std_logic; -- i2s playback left-right signal
+--            -- record channel
+--            oRecdat: out std_logic; -- i2s recorded data
+--            oReclrc: out std_logic; -- i2s rec left-right signal
 
             -- audio control i2c
             oSclk: out std_logic;
@@ -143,10 +143,10 @@ architecture v1 of zybo_top is
 
             -- misc/system
             oMute: out std_logic;
-            oMclk: out std_logic;
+            oMclk: out std_logic
             
-            -- LED
-            LED: out std_logic
+--             LED
+--            LED: out std_logic
         );
     end component;
 
@@ -168,7 +168,7 @@ architecture v1 of zybo_top is
             ioIO_pins: inout std_logic_vector
         );
     end component;
-   
+
     component counter
         port(
             cout   :out std_logic_vector (23 downto 0);
@@ -214,16 +214,16 @@ begin
             iScl => sIO_odata(1),
             oScl_e => sIO_en(1),
             oScl => sIO_idata(1),
-            LED => LED,
+--            LED => LED,
         -- SSM2603
             -- i2s: 2 channels sampled @ BCLK
-            oBclk => oBclk,
+--            oBclk => oBclk,
             -- playback channel
-            oPbdat => oPbdat,
-            oPblrc => oPblrc,
+--            oPbdat => oPbdat,
+--            oPblrc => oPblrc,
             -- record channel
-            oRecdat => oRecdat,
-            oReclrc => oReclrc,
+--            oRecdat => oRecdat,
+--            oReclrc => oReclrc,
 
             -- audio control i2c
             oSclk => oSclk,
@@ -251,8 +251,8 @@ begin
             iIO_en => sIO_en,
             oIO_data => sIO_odata,
 
-            ioIO_pins(0) => ioSDA,
-            ioIO_pins(1) => ioSCL,
+            ioIO_pins(0) => open,--ioSDA,
+            ioIO_pins(1) => open,--ioSCL,
             ioIO_pins(2) => ioSDIN
         );
        

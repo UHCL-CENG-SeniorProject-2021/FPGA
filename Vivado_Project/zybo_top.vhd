@@ -31,15 +31,15 @@ entity zybo_top is
 -- allows for stereo record and playback at sample rates from 8 kHz to 96 kHz.
 
 
--- BCLK     I²S (Serial Clock)      Output         R19
--- PBDAT    I²S (Playback Data)     Output         R18
--- PBLRC    I²S (Playback Channel   Output         T19
+-- BCLK     IÂ²S (Serial Clock)      Output         R19
+-- PBDAT    IÂ²S (Playback Data)     Output         R18
+-- PBLRC    IÂ²S (Playback Channel   Output         T19
 -- Clock)
--- RECDAT   I²S (Record Data)       Input          R16
--- RECLRC   I²S (Record Channel     Output         Y18
+-- RECDAT   IÂ²S (Record Data)       Input          R16
+-- RECLRC   IÂ²S (Record Channel     Output         Y18
 -- Clock)
--- SDIN     I²C (Data)              Input/Output   N17
--- SCLK     I²C (Clock)             Output         N18
+-- SDIN     IÂ²C (Data)              Input/Output   N17
+-- SCLK     IÂ²C (Clock)             Output         N18
 -- MUTE     Digital Enable (Active  Output         P18
 --          Low)
 -- MCLK     Master Clock            Output         R17

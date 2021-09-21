@@ -40,3 +40,8 @@ set_property -dict { PACKAGE_PIN R16   IOSTANDARD LVCMOS25 } [get_ports { oRECDA
 set_property -dict { PACKAGE_PIN Y18   IOSTANDARD LVCMOS25 } [get_ports { oRECLRC }]; #IO_L17P_T2_34 Sch=ac_reclrc
 set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS25 } [get_ports { oSCLK }]; #IO_L13P_T2_MRCC_34 Sch=ac_scl
 set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS25 } [get_ports { ioSDIN }]; #IO_L23P_T3_34 Sch=ac_sda
+
+set_property -dict { PACKAGE_PIN K17 IOSTANDARD LVCMOS18 } [get_ports { iClk }];
+set_property -dict { PACKAGE_PIN V12 IOSTANDARD LVCMOS18 } [get_ports { iRs }];
+set_property -dict { PACKAGE_PIN W16 IOSTANDARD LVCMOS18 } [get_ports { oRs }];
+set_property -dict { PACKAGE_PIN M14 IOSTANDARD LVCMOS18 } [get_ports { oGPIO }];

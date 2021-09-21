@@ -57,7 +57,32 @@ architecture v1 of product_top is
     -- TODO: define valid value
     -- max width of audio data sample vector
     constant cW: natural := 1;
+    constant cTest: boolean := true;
 
+    component grlib_tester is
+    port (
+        iClk: in std_logic;
+        iReset: in std_logic;
+
+        -- UART
+        iRs: in std_logic;
+        oRs: out std_logic;
+
+         --SPI
+        iSck: in std_logic;
+        iCsn: in std_logic;
+        iMosi: in std_logic;
+        oMiso: out std_logic;
+
+        -- Debug UART
+        iRs_dbg: in std_logic;
+        oRs_dbg: out std_logic;
+
+        iGPIO: in std_logic_vector (8 downto 0);
+        oGPIO: out std_logic
+    );
+end component;
+    
     component logic_top
         port (
             iClk: in std_logic;        -- was iClk_core, changed to iClk
@@ -73,6 +98,7 @@ architecture v1 of product_top is
             oMiso: out std_logic;
             iMosi: in std_logic;
 
+            iRs: in std_logic;
             -- i2c
 --            iSda: in std_logic;
 --            oSda_e: out std_logic;
@@ -89,8 +115,8 @@ architecture v1 of product_top is
 --            oSdin: out std_logic;
 
             -- misc/system
+            iGPIO: in std_logic_vector (8 downto 0);
             oGPIO: out std_logic
-
         -- internals
 --            iNd: in std_logic;
 --            iData: in std_logic_vector (cW-1 downto 0);
@@ -141,22 +167,44 @@ architecture v1 of product_top is
 --    signal sAck_rx: std_logic;
 
 begin
-
+    test: if(cTest)
+        generate begin
+    tester: grlib_tester 
+        port map(
+            iClk=>iClk_core, 
+            iReset => '1',
+            iRs_dbg=>iUART,
+            oRs_dbg=>oUART,
+            oGPIO=>LED,
+            iRs=>'1',
+            iSck=>'1',
+            iCsn=>'1',
+            iGPIO=>(others=>'0'),
+            iMosi=>'1'    
+    ); end generate;
+    
+    test2: if(not cTest)
+        generate begin
     ctrl: logic_top
         port map (
             iClk => iClk_core,
             iReset => iReset_core,
 
-            -- uart
+            -- uart 
             iUart_dbg => iUart,
             oUart_dbg => oUart,
 
             -- spi
-            iSck => iSck,
-            iCsn => iCsn,
-            oMiso => oMiso,
-            iMosi => iMosi,
-
+--            iSck => iSck,
+--            iCsn => iCsn,
+--            oMiso => oMiso,
+--            iMosi => iMosi,
+            
+              iRs=>'1',
+              iSck=>'1',
+              iCsn=>'1',
+              iGPIO=>(others=>'0'),
+              iMosi=>'1',
             -- i2c
 --            iSda => iSda,
 --            oSda_e => oSda_e,
@@ -173,7 +221,7 @@ begin
 --            oSdin => oSdin,
 
             -- misc/system
-            oGPIO => oMute
+            oGPIO => LED
 
         -- internals
 --            iNd => sNd_tx,
@@ -183,8 +231,9 @@ begin
 --            oNd => sNd_rx,
 --            oData => sData_rx,
 --            iAck => sAck_rx
-        );
-
+        ); end generate;
+        
+        
 --    i2s_ctrl_inst: i2s_ctrl
 --        port map (
 --            iClk_core => iClk_core,

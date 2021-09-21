@@ -17,8 +17,8 @@ entity logic_top is
         iReset: in std_logic;
 
         -- UART
-        iUart: in std_logic := '1';
-        oUart: out std_logic;
+        iRs: in std_logic;
+        oRs: out std_logic;
 
          --SPI
         iSck: in std_logic;
@@ -30,7 +30,7 @@ entity logic_top is
         iUart_dbg: in std_logic;
         oUart_dbg: out std_logic;
 
-        iGPIO: in std_logic_vector (8 downto 0) := (others=>'0');
+        iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
     );
 end logic_top;
@@ -84,10 +84,10 @@ architecture logic_top_arc of logic_top is
 
 begin
 
-    sUARTi.rxd <= iUart;
+    sUARTi.rxd <= iRs;
     sUARTi.extclk <= '0';
     sUARTi.ctsn <= '1';
-    oUart <= sUARTo.txd;
+    oRs <= sUARTo.txd;
 
     sSPIi.sck <= iSck;
     sSPIi.spisel <= iCsn;

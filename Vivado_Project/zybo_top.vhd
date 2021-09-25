@@ -26,10 +26,10 @@ entity zybo_top is
         oBCLK: out std_logic;   -- i2s clock
     -- playback channel
         oPBDAT: out std_logic;  -- i2s playback data
-        oPBLRC: out std_logic;  -- i2s playback left-right signal
+        oPBLRC: out std_logic;  -- i2s playback left-right CLK
     -- record channel
-        oRECDAT: out std_logic; -- i2s recorded data
-        oRECLRC: out std_logic; -- i2s rec left-right signal
+        iRECDAT: in std_logic; -- i2s recorded data
+        oRECLRC: out std_logic; -- i2s rec left-right CLK
     -- audio control i2c
         oSCLK: out std_logic;
         ioSDIN: inout std_logic;
@@ -55,7 +55,7 @@ entity zybo_top is
     attribute loc of oBCLK:   signal is "R19";
     attribute loc of oPBDAT:  signal is "R18";
     attribute loc of oPBLRC:  signal is "T19";
-    attribute loc of oRECDAT: signal is "R16";
+    attribute loc of iRECDAT: signal is "R16";
     attribute loc of oRECLRC: signal is "Y18";
     attribute loc of ioSDIN:  signal is "N17";
     attribute loc of oSCLK:   signal is "N18";
@@ -107,7 +107,7 @@ architecture v1 of zybo_top is
             oPbdat: out std_logic; -- i2s playback data
             oPblrc: out std_logic; -- i2s playback left-right signal
             -- record channel
-            oRecdat: out std_logic; -- i2s recorded data
+            iRecdat: in std_logic; -- i2s recorded data
             oReclrc: out std_logic; -- i2s rec left-right signal
 
             -- audio control i2c
@@ -183,10 +183,10 @@ begin
             iMOSI => iMOSI,
 
             -- i2c
-            iSda => sIO_odata(0),
+            iSda => sIO_odata(0),       -- serial data
             oSda_e => sIO_en(0),
             oSda => sIO_idata(0),
-            iScl => sIO_odata(1),
+            iScl => sIO_odata(1),       -- serial clock
             oScl_e => sIO_en(1),
             oScl => sIO_idata(1),
             LED => LED,
@@ -198,12 +198,12 @@ begin
             oPbdat => oPbdat,
             oPblrc => oPblrc,
             -- record channel
-            oRecdat => oRecdat,
+            iRecdat => iRecdat,
             oReclrc => oReclrc,
 
             -- audio control i2c
             oSclk => oSclk,
-            iSdin => sIO_odata(2),
+            iSdin => sIO_odata(2),      -- 
             oSdin_e => sIO_en(2),
             oSdin => sIO_idata(2),
 

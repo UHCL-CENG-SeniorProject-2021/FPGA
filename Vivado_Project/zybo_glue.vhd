@@ -5,18 +5,18 @@ use UNISIM.vcomponents.all;
 
 entity zybo_glue is
 port (
-            -- clocks
-            iCLK: in std_logic;
-            oClk_core: out std_logic;
-            oReset_core: out std_logic;
-            oClk_i2s: out std_logic;
-            oReset_i2s: out std_logic;
+   -- clocks
+   iCLK: in std_logic;
+   oClk_core: out std_logic;
+   oReset_core: out std_logic;
+   oClk_i2s: out std_logic;
+   oReset_i2s: out std_logic;
 
-            -- IO buffers
-            iIO_data: in std_logic_vector;
-            iIO_en: in std_logic_vector;
-            oIO_data: out std_logic_vector;
-            ioIO_pins: inout std_logic_vector
+   -- IO buffers
+   iIO_data: in std_logic_vector;
+   iIO_en: in std_logic_vector;
+   oIO_data: out std_logic_vector;
+   ioIO_pins: inout std_logic_vector
 );
 end entity;
 

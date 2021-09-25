@@ -20,7 +20,7 @@ entity logic_top is
         iRs: in std_logic;
         oRs: out std_logic;
 
-         --SPI
+        -- SPI
         iSck: in std_logic;
         iCsn: in std_logic;
         iMosi: in std_logic;
@@ -37,20 +37,20 @@ end logic_top;
 
 architecture logic_top_arc of logic_top is
 
-    ----------------- AMBA constants
+    ----------------- AMBA constants ------------------
     constant cAHB_def_master: integer := 0;
     constant cAPBCTRL_AHB_addr: integer := 16#800#;
     constant cAPBCTRL_AHB_mask: integer := 16#f00#;
 
-    ----------- AMBA AHB Masters Indeces
+    ----------- AMBA AHB Masters Indeces ------------------
     constant cINDEX_AHBM_UART_DBG: integer := 0;
     constant cAHB_mst_num: integer := 1;
 
-    ---------------- AMBA AHB Slaves Indeces
+    ---------------- AMBA AHB Slaves Indeces ------------------
     constant cINDEX_AHBS_APBCTRL: integer := 0;
     constant cAHB_slv_num: integer := 1;
 
-    ------------------ AMBA APB Indeces
+    ------------------ AMBA APB Indeces ------------------
     constant cINDEX_APB_GPIO: integer := 0;
     constant cINDEX_APB_APBUART: integer := 1;
     constant cINDEX_APB_SPI: integer := 2;
@@ -100,7 +100,7 @@ begin
     sGPIOi.din(8 downto 0) <= iGPIO;
     oGPIO <= sGPIOo.dout(9);
 
------------------ Common components
+----------------- Common components -----------------
     -- Reset synchronizer
     reset_gen: rstgen
         generic map (
@@ -113,7 +113,7 @@ begin
             rstout => sReset_synch
         );
 
------------------ AMBA AHB components
+----------------- AMBA AHB components -----------------
     -- AHB ctrl
     ahb_ctrl: ahbctrl
         generic map (
@@ -149,7 +149,7 @@ begin
             ahbo => sAHBmo(cINDEX_AHBM_UART_DBG)
         );
 
------------------ AMBA APB components
+----------------- AMBA APB components -----------------
     -- APB ctrl
     apb_ctrl: apbctrl
         generic map (

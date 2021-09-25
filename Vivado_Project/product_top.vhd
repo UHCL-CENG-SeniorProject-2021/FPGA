@@ -36,7 +36,7 @@ entity product_top is
         oPbdat: out std_logic; -- i2s playback data
         oPblrc: out std_logic; -- i2s playback left-right signal
         -- record channel
-        oRecdat: out std_logic; -- i2s recorded data
+        iRecdat: in std_logic; -- i2s recorded data
         oReclrc: out std_logic; -- i2s rec left-right signal
 
         -- audio control i2c
@@ -151,7 +151,7 @@ end component;
             oPbdat: out std_logic;  -- i2s playback data -- R18
             oPblrc: out std_logic;  -- i2s playback L/R signal
             -- record channel
-            oRecdat: out std_logic; -- i2s recorded data
+            iRecdat: in std_logic; -- i2s recorded data
             oReclrc: out std_logic; -- i2s rec L/R signal
 
             -- misc/system
@@ -159,13 +159,15 @@ end component;
             oMute: out std_logic
        );
     end component;
-
+    
+----------------------------------Signals----------------------------------
     signal sNd_tx: std_logic;                           -- ?
-    signal sData_tx: std_logic_vector (cW-1 downto 0);  -- data transfer
-    signal sAck_tx: std_logic;                          -- acknowledge transfer
     signal sNd_rx: std_logic;                           -- ??
+    signal sData_tx: std_logic_vector (cW-1 downto 0);  -- data transfer
     signal sData_rx: std_logic_vector (cW-1 downto 0);  -- data receive
+    signal sAck_tx: std_logic;                          -- acknowledge transfer
     signal sAck_rx: std_logic;                          -- acknowledge receive
+---------------------------------------------------------------------------
 
 begin
     test: if(cTest)
@@ -257,7 +259,7 @@ begin
                 oPbdat => oPbdat,
                 oPblrc => oPblrc,
                 -- record channel
-                oRecdat => oRecdat,
+                iRecdat => iRecdat,
                 oReclrc => oReclrc,
                 -- misc/system
                 oMclk => oMclk,

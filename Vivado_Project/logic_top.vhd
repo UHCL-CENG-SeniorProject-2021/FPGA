@@ -49,10 +49,8 @@ architecture logic_top_arc of logic_top is
 
     ----------- AMBA AHB Masters Indeces
     constant cINDEX_AHBM_UART_DBG: integer := 0;
-
     constant cINDEX_AHBM_SPI: integer := 1;
     constant cAHB_mst_num: integer := 2;    -- no. of AHB masters on the bus (UART, SPI)
-
 
     ---------------- AMBA AHB Slaves Indeces
     constant cINDEX_AHBS_APBCTRL: integer := 0;
@@ -229,6 +227,9 @@ begin
             ahbi => sAHBmi,
             ahbo => sAHBmo(cINDEX_AHBM_SPI),
             -- SPI signals
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
             spii => sSPIi,
             spio => sSPIo

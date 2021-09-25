@@ -91,16 +91,16 @@ end component;
             iReset: in std_logic;
 
             -- uart
+            iRs: in std_logic;
             iUart_dbg: in std_logic;
             oUart_dbg: out std_logic;
 
             -- spi
-            iSck: in std_logic;
-            iCsn: in std_logic;
-            oMiso: out std_logic;
-            iMosi: in std_logic;
-
-            iRs: in std_logic;
+            iSck: in std_logic;     -- Serial Clock
+            iCsn: in std_logic;     -- Chip/Slave Select (not)
+            oMiso: out std_logic;   -- Master In, Slave Out
+            iMosi: in std_logic;    -- Master Out, Slave In
+            
             -- i2c
 --            iSda: in std_logic;
 --            oSda_e: out std_logic;

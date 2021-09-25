@@ -20,21 +20,16 @@ entity logic_top is
         iRs: in std_logic;
         oRs: out std_logic;
 
+         --SPI
+        iSck: in std_logic;
+        iCsn: in std_logic;
+        iMosi: in std_logic;
+        oMiso: out std_logic;
+
         -- Debug UART
         iUart_dbg: in std_logic;
         oUart_dbg: out std_logic;
-        
-        -- SPI (https://gaisler.com/products/grlib/grip.pdf, page 1713)
-        -- In some systems with only one master and one slave, the Slave Select input of the slave may 
-        -- be always active and the master does not need to have a slave select output. This does not 
-        -- apply to this SPI to AHB bridge, the slave select signal must be used to mark the start and
-        -- end of an operation.
-        iSck: in std_logic;     -- serial clock
-        iCsn: in std_logic;     -- chip/slave select
-        iMosi: in std_logic;    -- Master Out, Slave In
-        oMiso: out std_logic;   -- Master in, Slave Out
-        
-        -- General Purpose I/O
+
         iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
     );
@@ -49,8 +44,7 @@ architecture logic_top_arc of logic_top is
 
     ----------- AMBA AHB Masters Indeces
     constant cINDEX_AHBM_UART_DBG: integer := 0;
-    constant cINDEX_AHBM_SPI: integer := 1;
-    constant cAHB_mst_num: integer := 2;    -- no. of AHB masters on the bus (UART, SPI)
+    constant cAHB_mst_num: integer := 1;
 
     ---------------- AMBA AHB Slaves Indeces
     constant cINDEX_AHBS_APBCTRL: integer := 0;
@@ -191,7 +185,6 @@ begin
     -- SPI
     spi: spictrl
         generic map (
-<<<<<<< Updated upstream
             pindex => cINDEX_APB_SPI,
             paddr => cINDEX_APB_SPI
         )
@@ -200,37 +193,6 @@ begin
             clk => iClk,
             apbi => sAPBi,
             apbo => sAPBo(cINDEX_APB_SPI),
-=======
-   -- AHB Configuration
-        -- AHB master index (allowed range 0 - NAHBMST)     
-        hindex => cINDEX_AHBM_SPI,
-        -- ahb address hi/lo (can restrict access to memory)
-        ahbaddrh => 0,  -- bits 31:16 of addr used for mem protection area (0-16#FFF#)
-        ahbaddrl => 0,  -- bits 15:0
-        -- ahb mask hi/lo
-        ahbmaskh => 0,  -- bits 31:16 of mask used for mem protection area (0-16#FFF#)
-        ahbmaskl => 0,  -- bits 15:0 ...
-        -- TODO: which enable pin sets tri-state iobuf (zybo)
-        oepol => 0,     -- Output enable polatiry (2-512, default 2) check active level / polarity
-        -- Rpi should start with lower speeds (lower than 100kHz)
-        filter => 2,    -- filters noise, set high and adjust accordingly (decrease) [random guess: set to quarter of SPI freq]
-        -- polarity of spi signal, should be same for fpga and pi
-        -- if we start to lose samples, check here to fix (may interfere with FIFO)
-        -- The combined values of clock polarity (CPOL) and clock phase (CPHA) determine the mode of the SPI bus.
-        cpol => 0,      -- Clock polarity of SPI clock (SCK) (range: 0-1, default: 0)
-        cpha => 1       -- Clock phase of SPI comms (range: 0-1, default 0) [review wiki pic]
-        )
-        port map(
-            rstn => sReset_synch,
-            clk => iClk,
-            -- AHB master interface
-            ahbi => sAHBmi,
-            ahbo => sAHBmo(cINDEX_AHBM_SPI),
-            -- SPI signals
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
             spii => sSPIi,
             spio => sSPIo
         );

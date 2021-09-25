@@ -7,58 +7,33 @@ entity zybo_top is
     port (
 --------------------------------------------
 -- system signals
-        iCLK: in std_logic;     -- FPGA clock
+        iCLK: in std_logic;     -- FPGA master clock
         iRESET: in std_logic;   -- FPGA reset
 --------------------------------------------
 -- rpi comms
-
-        -- uart (tx/rx)
+    -- uart (tx/rx)
         iUART: in std_logic;
         oUART: out std_logic;
-
-        -- spi (fpga <-> pi)
+    -- spi (fpga <-> pi)
         iSCK: in std_logic;
         iCSN: in std_logic;
         oMISO: out std_logic;
         iMOSI: in std_logic;
-
-        -- i2c
+    -- i2c
         ioSDA: inout std_logic;
         ioSCL: inout std_logic;
-
---------------------------------------------
--- SSM2603 (on-board audio codec, pg22) device address: 0011010b
--- allows for stereo record and playback at sample rates from 8 kHz to 96 kHz.
-
-
--- BCLK     I²S (Serial Clock)      Output         R19
--- PBDAT    I²S (Playback Data)     Output         R18
--- PBLRC    I²S (Playback Channel   Output         T19
--- Clock)
--- RECDAT   I²S (Record Data)       Input          R16
--- RECLRC   I²S (Record Channel     Output         Y18
--- Clock)
--- SDIN     I²C (Data)              Input/Output   N17
--- SCLK     I²C (Clock)             Output         N18
--- MUTE     Digital Enable (Active  Output         P18
---          Low)
--- MCLK     Master Clock            Output         R17
-
-        -- i2s: 2 channels sampled @ BCLK
-        oBCLK: out std_logic; -- i2s clock
-
-        -- playback channel
-        oPBDAT: out std_logic; -- i2s playback data
-        oPBLRC: out std_logic; -- i2s playback left-right signal
-        -- record channel
+    -- i2s: 2 channels sampled @ BCLK
+        oBCLK: out std_logic;   -- i2s clock
+    -- playback channel
+        oPBDAT: out std_logic;  -- i2s playback data
+        oPBLRC: out std_logic;  -- i2s playback left-right signal
+    -- record channel
         oRECDAT: out std_logic; -- i2s recorded data
         oRECLRC: out std_logic; -- i2s rec left-right signal
-
-        -- audio control i2c
+    -- audio control i2c
         oSCLK: out std_logic;
         ioSDIN: inout std_logic;
-
-        -- misc/system
+    -- misc/system
         oMUTE: out std_logic;
         oMCLK: out std_logic;
         LED: out std_logic;
@@ -66,16 +41,16 @@ entity zybo_top is
     ); -- END PORT
 
     attribute loc: string;
---    attribute loc of iCLK:  signal is "K17";  -- 125 MHz pin
---    attribute loc of iUART:   signal is "V12";  -- Std Pmod JE pg29 z7RM
---    attribute loc of oUART:   signal is "W16";
-    attribute loc of iSCK:  signal is "V15";
-    attribute loc of iCSN:  signal is "W15";
+    attribute loc of iCLK:    signal is "K17";  -- 125 MHz pin
+    attribute loc of iUART:   signal is "V12";  -- Std Pmod JE pg29 z7RM
+    attribute loc of oUART:   signal is "W16";
+    attribute loc of iSCK:    signal is "V15";
+    attribute loc of iCSN:    signal is "W15";
     attribute loc of oMISO:   signal is "T11";
     attribute loc of iMOSI:   signal is "T10";
     attribute loc of ioSDA:   signal is "W14";
     attribute loc of ioSCL:   signal is "Y14";
-    -- pg 22: hph out(blk), mic in(pink), line in(blue): J5, J6, J7
+    -- pg 22: headphone out(blk), mic-in(pink), line-in(blue): J5, J6, J7
     -- pins below located pg22 of Zybo RM
     attribute loc of oBCLK:   signal is "R19";
     attribute loc of oPBDAT:  signal is "R18";
@@ -86,7 +61,7 @@ entity zybo_top is
     attribute loc of oSCLK:   signal is "N18";
     attribute loc of oMUTE:   signal is "P18";
     attribute loc of oMCLK:   signal is "R17";
---    attribute loc of LED:     signal is "M14";          -- LEDs to debug UART
+    attribute loc of LED:     signal is "M14";          -- LEDs to debug UART
     attribute loc of LED_Reset: signal is "M15";
    
     signal count_sig: std_logic_vector(23 downto 0);
@@ -215,6 +190,7 @@ begin
             oScl_e => sIO_en(1),
             oScl => sIO_idata(1),
             LED => LED,
+            
         -- SSM2603
             -- i2s: 2 channels sampled @ BCLK
             oBclk => oBclk,

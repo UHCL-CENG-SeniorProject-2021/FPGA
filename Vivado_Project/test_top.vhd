@@ -1,76 +1,126 @@
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating
--- any Xilinx leaf cells in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
-
 entity test_top is
     port (
-----------------system signals--------------
-        iCLK: in std_logic;     -- FPGA clock
-        iRESET: in std_logic;   -- FPGA reset
-
-        -- UART
-        iRs: in std_logic;
-        oRs: out std_logic;
-        iGPIO: out std_logic;
-        oGPIO: out std_logic
+----------------system signals-----------------
+        iCLK: in std_logic;     -- System clock
+        iRESET: in std_logic;   -- System reset
+-----------------------------------------------
+        -- i2c
+        ioSDA: inout std_logic;
+        ioSCL: inout std_logic;
+        -- I2S                  -- 2 channels sampled @ BCLK
+        oBCLK: out std_logic;   -- i2s clock
+        -- playback channel
+        oPBDAT: out std_logic;  -- i2s playback data
+        oPBLRC: out std_logic;  -- i2s playback L/R CLK
+        -- record channel
+        iRECDAT: in std_logic;  -- i2s recorded data
+        oRECLRC: out std_logic; -- i2s rec L/R CLK
+        -- audio control i2c
+        oSCLK: out std_logic;
+        ioSDIN: inout std_logic;
+        -- misc/system
+        oMUTE: out std_logic;
+        oMCLK: out std_logic
     );
-end test_top;
+
+attribute loc: string;
+attribute loc of iCLK:    signal is "K17";  -- 125 MHz pin, set to 50MHz
+attribute loc of oBCLK:   signal is "R19";  -- I²S (Serial Clock)
+attribute loc of oPBDAT:  signal is "R18";  -- I²S (Playback Data)
+attribute loc of oPBLRC:  signal is "T19";  -- I²S (Playback Channel Clock)
+attribute loc of iRECDAT: signal is "R16";  -- I²S (Record Data)
+attribute loc of oRECLRC: signal is "Y18";  -- I²S (Record Channel Clock)
+attribute loc of ioSDIN:  signal is "N17";  -- I²C (Data)
+attribute loc of oSCLK:   signal is "N18";  -- I²C (Clock)
+attribute loc of oMUTE:   signal is "P18";  -- Digital Enable (Active Low)
+attribute loc of oMCLK:   signal is "R17";  -- Master Clock
+attribute loc of ioSDA:   signal is "W14";  -- I/O pin, JC Pmod
+attribute loc of ioSCL:   signal is "Y14";  -- I/O pin, JC Pmod
+        
+end entity;
 
 architecture Behavioral of test_top is
 
-constant test_UART: boolean := false;
+constant cIO_n: natural := 3; -- number of inout pins
 
-component logic_top is
-    port (
-        iClk: in std_logic;
-        iReset: in std_logic;
-
-        -- UART
-        iRs: in std_logic;
-        oRs: out std_logic;
-
-         --SPI
-        iSck: in std_logic;
-        iCsn: in std_logic;
-        iMosi: in std_logic;
-        oMiso: out std_logic;
-
-        -- Debug UART
-        iUART_dbg: in std_logic;
-        oUART_dbg: out std_logic;
-
-        iGPIO: in std_logic_vector (8 downto 0);
-        oGPIO: out std_logic
+component i2s_basic is
+    port(
+    ------------------- global signals -------------------    
+        iClk_core: in std_logic;        -- system clock
+        iReset_core: in std_logic;      -- system reset
+    ------------------------------------------------------
+        -- i2s: 2 channels sampled @ BCLK
+        oBclk: out std_logic;           -- i2s serial clock
+        -- playback channel
+        oPbdat: out std_logic;          -- i2s playback data
+        oPblrc: out std_logic;          -- i2s playback L/R CLK
+        -- record channel
+        iRecdat: in std_logic;          -- i2s recorded data
+        oReclrc: out std_logic;         -- i2s rec L/R CLK
+        -- misc/system
+        oMclk: out std_logic;           -- Master Clock
+        oMute: out std_logic            -- digital enable (active low)
     );
-end component;
+    end component;
+
+    component zybo_glue
+    port (
+        -- clocks
+        iCLK: in std_logic;
+        oClk_core: out std_logic;
+        oReset_core: out std_logic;
+        oClk_i2s: out std_logic;
+        oReset_i2s: out std_logic;
+
+        -- IO buffers
+        iIO_data: in std_logic_vector;
+        iIO_en: in std_logic_vector;
+        oIO_data: out std_logic_vector;
+
+        ioIO_pins: inout std_logic_vector
+    );
+    end component;
+
+    signal sIO_idata: std_logic_vector (cIO_n-1 downto 0);
+    signal sIO_en: std_logic_vector (cIO_n-1 downto 0);
+    signal sIO_odata: std_logic_vector (cIO_n-1 downto 0);
+    signal sClk_core: std_logic;
+    signal sReset_core: std_logic;
+    signal sClk_i2s: std_logic;
+    signal sReset_i2s: std_logic;
 
 begin
-test_GRLIB: if(not test_UART)
-    generate begin
-tester: logic_top port map(
-    iClk=>iClk, 
-    iReset => iRESET,
-    iUART_dbg=>iRs,
-    oUART_dbg=>oRs,
-    oGPIO=>oGPIO,
-    iRs=>'1',
-    iSck=>'1',
-    iCsn=>'1',
-    iGPIO=>(others=>'0'),
-    iMosi=>'1'    
-    ); end generate;
-    
-    UART_test: if(test_UART)
-        generate begin
-        oRs<=iRs;
-        oGPIO<='1';
-        end generate;
+
+    glue: zybo_glue port map (
+    -- clocks
+        iCLK => iCLK,
+        oClk_core => sClk_core,
+        oReset_core => sReset_core,
+        oClk_i2s => sClk_i2s,
+        oReset_i2s => sReset_i2s,
+
+    -- IO buffers
+        iIO_data => sIO_idata,
+        iIO_en => sIO_en,
+        oIO_data => sIO_odata,
+        ioIO_pins(0) => ioSDA,
+        ioIO_pins(1) => ioSCL,
+        ioIO_pins(2) => ioSDIN
+    );
+
+    i2s_test: i2s_basic port map(
+        iClk_core => sClk_core,
+        iReset_core => sReset_core,     
+        oBclk => oBclk,
+        oPbdat => oPbdat,
+        oPblrc => oPblrc,
+        iRecdat => iRecdat,
+        oReclrc => oReclrc,
+        oMclk => oMclk,
+        oMute => oMute
+    );
+
 end Behavioral;

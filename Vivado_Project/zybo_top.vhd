@@ -203,7 +203,7 @@ begin
 
             -- audio control i2c
             oSclk => oSclk,
-            iSdin => sIO_odata(2),      -- 
+            iSdin => sIO_odata(2),
             oSdin_e => sIO_en(2),
             oSdin => sIO_idata(2),
 

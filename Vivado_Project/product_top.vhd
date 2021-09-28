@@ -170,100 +170,33 @@ end component;
 ---------------------------------------------------------------------------
 
 begin
-    test: if(cTest)
-        generate begin
-        tester: grlib_tester 
-            port map(
-                iClk=>iClk_core, 
-                iReset => '1',
-                iRs_dbg=>iUART,
-                oRs_dbg=>oUART,
-                oGPIO=>LED,
-                iRs=>'1',
-                iSck=>'1',
-                iCsn=>'1',
-                iGPIO=>(others=>'0'),
-                iMosi=>'1'    
-    ); end generate;
+    i2s_ctrl_inst: i2s_ctrl
+        port map (
+            iClk_core => iClk_core,
+            iReset_core => iReset_core,
+            iClk_i2s => iClk_i2s,
+            iReset_i2s => iReset_i2s,
     
-    test2: if(not cTest)
-        generate begin
-        ctrl: logic_top
-            port map (
-                iClk => iClk_core,
-                iReset => iReset_core,
+        -- internals
+            iNd => sNd_rx,
+            iData => sData_rx,
+            oAck => sAck_rx,
+            oNd => sNd_tx,
+            oData => sData_tx,
+            iAck => sAck_tx,
     
-                -- uart 
-                iUart_dbg => iUart,
-                oUart_dbg => oUart,
-    
-                -- spi
-    --            iSck => iSck,
-    --            iCsn => iCsn,
-    --            oMiso => oMiso,
-    --            iMosi => iMosi,
-                
-                  iRs=>'1',
-                  iSck=>'1',
-                  iCsn=>'1',
-                  iGPIO=>(others=>'0'),
-                  iMosi=>'1',
-                -- i2c
-       --         iSda => iSda,
-       --         oSda_e => oSda_e,
-       --         oSda => oSda,
-       --         iScl => iScl,
-       --         oScl_e => oScl_e,
-       --         oScl => oScl,
-    
-            -- SSM2603
-    --             audio control i2c
-                oSclk => oSclk,
-                iSdin => iSdin,
-                oSdin_e => oSdin_e,
-                oSdin => oSdin,
-    
-                -- misc/system
-                oGPIO => LED
-    
-            -- internals
-    --            iNd => sNd_tx,
-    --            iData => sData_tx,
-    --            oAck => sAck_tx,
-    
-    --            oNd => sNd_rx,
-    --            oData => sData_rx,
-    --            iAck => sAck_rx
-            ); end generate;
-            
-            
-        i2s_ctrl_inst: i2s_ctrl
-            port map (
-                iClk_core => iClk_core,
-                iReset_core => iReset_core,
-                iClk_i2s => iClk_i2s,
-                iReset_i2s => iReset_i2s,
-    
-            -- internals
-                iNd => sNd_rx,
-                iData => sData_rx,
-                oAck => sAck_rx,
-                oNd => sNd_tx,
-                oData => sData_tx,
-                iAck => sAck_tx,
-    
-            -- SSM2603
-                -- i2s: 2 channels sampled @ BCLK
-                oBclk => oBclk,
-                -- playback channel
-                oPbdat => oPbdat,
-                oPblrc => oPblrc,
-                -- record channel
-                iRecdat => iRecdat,
-                oReclrc => oReclrc,
-                -- misc/system
-                oMclk => oMclk,
-                oMute => oMute
-       );
+        -- SSM2603
+            -- i2s: 2 channels sampled @ BCLK
+            oBclk => oBclk,
+            -- playback channel
+            oPbdat => oPbdat,
+            oPblrc => oPblrc,
+            -- record channel
+            iRecdat => iRecdat,
+            oReclrc => oReclrc,
+            -- misc/system
+            oMclk => oMclk,
+            oMute => oMute
+    );
 
 end v1;

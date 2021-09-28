@@ -1,0 +1,53 @@
+Vivado Simulator 2019.2
+Copyright 1986-1999, 2001-2019 Xilinx, Inc. All Rights Reserved.
+Running: C:/Xilinx/Vivado/2019.2/bin/unwrapped/win64.o/xelab.exe -wto 092212ac5365430da6e156c640678d5e --incr --debug typical --relax --mt 2 -L grlib -L techmap -L gaisler -L xil_defaultlib -L unisims_ver -L unimacro_ver -L secureip -L xpm --snapshot grlib_tester_behav xil_defaultlib.grlib_tester xil_defaultlib.glbl -log elaborate.log 
+Using 2 slave threads.
+Starting static elaboration
+Pass Through NonSizing Optimizer
+WARNING: [VRFC 10-4940] 'report_version' remains a black box since it has no binding entity [C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/grlib-main/lib/gaisler/uart/ahbuart.vhd:77]
+WARNING: [VRFC 10-4940] 'report_version' remains a black box since it has no binding entity [C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/grlib-main/lib/gaisler/misc/grgpio.vhd:469]
+WARNING: [VRFC 10-4940] 'report_version' remains a black box since it has no binding entity [C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/grlib-main/lib/gaisler/spi/spictrl.vhd:309]
+WARNING: [VRFC 10-4940] 'report_version' remains a black box since it has no binding entity [C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/grlib-main/lib/gaisler/uart/apbuart.vhd:574]
+Completed static elaboration
+Starting simulation data flow analysis
+Completed simulation data flow analysis
+Time Resolution for simulation is 1ps
+Compiling package std.standard
+Compiling package std.textio
+Compiling package ieee.std_logic_1164
+Compiling package ieee.numeric_std
+Compiling package grlib.config_types
+Compiling package grlib.config
+Compiling package grlib.version
+Compiling package grlib.stdlib
+Compiling package grlib.amba
+Compiling package techmap.gencomp
+Compiling package gaisler.leon3
+Compiling package gaisler.uart
+Compiling package grlib.devices
+Compiling package gaisler.misc
+Compiling package gaisler.spi
+Compiling package ieee.math_real
+Compiling package grlib.stdio
+Compiling package grlib.testlib
+Compiling package gaisler.libdcom
+Compiling package techmap.netcomp
+Compiling package techmap.allmem
+Compiling module xil_defaultlib.glbl
+Compiling architecture rtl of entity gaisler.rstgen [\rstgen(syncrst=1)\]
+Compiling architecture rtl of entity grlib.ahbctrl [\ahbctrl(nahbm=1,nahbs=1,ioen=0,...]
+Compiling architecture rtl of entity grlib.ahbmst [\ahbmst(venid=1,devid=7)\]
+Compiling architecture rtl of entity gaisler.dcom_uart [\dcom_uart(pindex=3,paddr=3)\]
+Compiling architecture struct of entity gaisler.dcom [dcom_default]
+Compiling architecture struct of entity gaisler.ahbuart [\ahbuart(pindex=3,paddr=3)\]
+Compiling architecture rtl of entity grlib.apbctrlx [\apbctrlx(haddr0=2048,hmask0=384...]
+Compiling architecture struct of entity grlib.apbctrl [\apbctrl(haddr=2048,hmask=3840,n...]
+Compiling architecture rtl of entity gaisler.grgpio [\grgpio(nbits=10)\]
+Compiling architecture behav of entity techmap.generic_syncram_2p [\generic_syncram_2p(abits=1)\]
+Compiling architecture rtl of entity techmap.memrwcol [\memrwcol(techwrfst=0,techrwcol=...]
+Compiling architecture rtl of entity techmap.syncram_2p [\syncram_2p(abits=1,dbits=32,wrf...]
+Compiling architecture rtl of entity gaisler.spictrlx [\spictrlx(rev=6)\]
+Compiling architecture rtl of entity gaisler.spictrl [\spictrl(pindex=2,paddr=2)\]
+Compiling architecture rtl of entity gaisler.apbuart [\apbuart(pindex=1,paddr=1)\]
+Compiling architecture logic_top_arc of entity xil_defaultlib.grlib_tester
+Built simulation snapshot grlib_tester_behav

@@ -1,0 +1,60 @@
+# compile vhdl design source files
+vhdl grlib  \
+"../../../../../grlib-main/lib/grlib/stdlib/version.vhd" \
+"../../../../../grlib-main/lib/grlib/stdlib/stdlib.vhd" \
+"../../../../../grlib-main/lib/grlib/stdlib/config_types.vhd" \
+"../../../../../grlib-main/lib/grlib/stdlib/config.vhd" \
+"../../../../../grlib-main/lib/grlib/amba/amba.vhd" \
+"../../../../../grlib-main/lib/grlib/amba/devices.vhd" \
+"../../../../../grlib-main/lib/grlib/stdlib/stdio.vhd" \
+"../../../../../grlib-main/lib/grlib/stdlib/testlib.vhd" \
+"../../../../../grlib-main/lib/grlib/amba/ahbctrl.vhd" \
+"../../../../../grlib-main/lib/grlib/amba/ahbmst.vhd" \
+
+vhdl techmap  \
+"../../../../../grlib-main/lib/techmap/gencomp/gencomp.vhd" \
+
+vhdl gaisler  \
+"../../../../../grlib-main/lib/gaisler/misc/misc.vhd" \
+"../../../../../grlib-main/lib/gaisler/uart/uart.vhd" \
+"../../../../../grlib-main/lib/gaisler/uart/libdcom.vhd" \
+"../../../../../grlib-main/lib/gaisler/uart/ahbuart.vhd" \
+
+vhdl techmap  \
+"../../../../../grlib-main/lib/techmap/alltech/allmem.vhd" \
+
+vhdl grlib  \
+"../../../../../grlib-main/lib/grlib/amba/apbctrl.vhd" \
+"../../../../../grlib-main/lib/grlib/amba/apbctrlx.vhd" \
+
+vhdl gaisler  \
+"../../../../../grlib-main/lib/gaisler/uart/apbuart.vhd" \
+"../../../../../grlib-main/lib/gaisler/uart/dcom.vhd" \
+"../../../../../grlib-main/lib/gaisler/uart/dcom_uart.vhd" \
+"../../../../../grlib-main/lib/gaisler/misc/grgpio.vhd" \
+"../../../../../grlib-main/lib/gaisler/leon3/leon3.vhd" \
+"../../../../../grlib-main/lib/gaisler/spi/spi.vhd" \
+
+vhdl techmap  \
+"../../../../../grlib-main/lib/techmap/inferred/memory_inferred.vhd" \
+"../../../../../grlib-main/lib/techmap/maps/memrwcol.vhd" \
+"../../../../../grlib-main/lib/techmap/gencomp/netcomp.vhd" \
+
+vhdl gaisler  \
+"../../../../../grlib-main/lib/gaisler/misc/rstgen.vhd" \
+"../../../../../grlib-main/lib/gaisler/spi/spictrl.vhd" \
+
+vhdl techmap  \
+"../../../../../grlib-main/lib/techmap/maps/spictrl_net.vhd" \
+
+vhdl gaisler  \
+"../../../../../grlib-main/lib/gaisler/spi/spictrlx.vhd" \
+
+vhdl techmap  \
+"../../../../../grlib-main/lib/techmap/maps/syncram_2p.vhd" \
+
+vhdl xil_defaultlib  \
+"../../../../../grlib_tester.vhd" \
+
+# Do not sort compile order
+nosort

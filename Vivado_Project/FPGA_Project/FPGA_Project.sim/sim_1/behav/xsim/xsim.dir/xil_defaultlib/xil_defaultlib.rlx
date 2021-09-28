@@ -1,0 +1,14 @@
+0.6
+2019.2
+Nov  6 2019
+21:57:16
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/FPGA_Project/FPGA_Project.sim/sim_1/behav/xsim/glbl.v,1573089660,verilog,,,,glbl,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/new/i2s_basic.vhd,1632765507,vhdl,,,,i2s_basic,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/FPGA_Project/FPGA_Project.srcs/sources_1/new/sine_dds.vhd,1632756630,vhdl,,,,sine_dds,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/counter.vhd,1628363918,vhdl,,,,counter,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/grlib_tester.vhd,1628752086,vhdl,,,,grlib_tester,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/i2s_ctrl.vhd,1632530118,vhdl,,,,i2s_ctrl,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/logic_top.vhd,1632619782,vhdl,,,,logic_top,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/product_top.vhd,1632707918,vhdl,,,,product_top,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/test_top.vhd,1632770122,vhdl,,,,test_top,,,,,,,,
+C:/Users/Bklolo/Desktop/Senior_Proj/bran_test/Vivado_Project/zybo_glue.vhd,1632769363,vhdl,,,,zybo_glue,,,,,,,,

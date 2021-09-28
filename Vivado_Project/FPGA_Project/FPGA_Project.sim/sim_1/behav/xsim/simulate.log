@@ -1,0 +1,18 @@
+Vivado Simulator 2019.2
+Time resolution is 1 ps
+ahbctrl: AHB arbiter/multiplexer rev 1
+ahbctrl: Common I/O area disabled
+ahbctrl: AHB masters: 1, AHB slaves: 1
+ahbctrl: Configuration area at 0xfffff000, 4 kbyte
+ahbctrl: mst0: Cobham Gaisler          AHB Debug UART                  
+ahbctrl: slv0: Cobham Gaisler          AHB/APB Bridge                  
+ahbctrl:       memory at 0x80000000, size 256 Mbyte
+apbctrl: APB Bridge at 0x80000000 rev 1
+apbctrl: slv0: Cobham Gaisler          General Purpose I/O port        
+apbctrl:       I/O ports at 0x80000000, size 256 byte 
+apbctrl: slv1: Cobham Gaisler          Generic UART                    
+apbctrl:       I/O ports at 0x80000100, size 256 byte 
+apbctrl: slv2: Cobham Gaisler          SPI Controller                  
+apbctrl:       I/O ports at 0x80000200, size 256 byte 
+apbctrl: slv3: Cobham Gaisler          AHB Debug UART                  
+apbctrl:       I/O ports at 0x80000300, size 256 byte 

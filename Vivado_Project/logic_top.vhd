@@ -17,18 +17,18 @@ entity logic_top is
         iReset: in std_logic;
 
         -- UART
-        iRs: in std_logic;
-        oRs: out std_logic;
+        iUART: in std_logic;
+        oUART: out std_logic;
 
          --SPI
-        iSck: in std_logic;
-        iCsn: in std_logic;
-        iMosi: in std_logic;
-        oMiso: out std_logic;
+--        iSck: in std_logic;
+--        iCsn: in std_logic;
+--        iMosi: in std_logic;
+--        oMiso: out std_logic;
 
         -- Debug UART
-        iUart_dbg: in std_logic;
-        oUart_dbg: out std_logic;
+        iUART_dbg: in std_logic;
+        oUART_dbg: out std_logic;
 
         iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
@@ -84,18 +84,18 @@ architecture logic_top_arc of logic_top is
 
 begin
 
-    sUARTi.rxd <= iRs;
+    sUARTi.rxd <= iUART;
     sUARTi.extclk <= '0';
     sUARTi.ctsn <= '1';
-    oRs <= sUARTo.txd;
+    oUART <= sUARTo.txd;
 
-    sSPIi.sck <= iSck;
-    sSPIi.spisel <= iCsn;
-    sSPIi.mosi <= iMosi;
-    oMiso <= sSPIo.miso;
+--    sSPIi.sck <= iSck;
+--    sSPIi.spisel <= iCsn;
+--    sSPIi.mosi <= iMosi;
+--    oMiso <= sSPIo.miso;
 
-    sUART_dbg_i.rxd <= iUart_dbg;
-    oUart_dbg <= sUART_dbg_o.txd;
+    sUART_dbg_i.rxd <= iUART_dbg;
+    oUART_dbg <= sUART_dbg_o.txd;
 
     sGPIOi.din(8 downto 0) <= iGPIO;
     oGPIO <= sGPIOo.dout(9);

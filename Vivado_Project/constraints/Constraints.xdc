@@ -21,8 +21,8 @@ set_property -dict { PACKAGE_PIN K17   IOSTANDARD LVCMOS25 } [get_ports { iCLK }
 #set_property -dict { PACKAGE_PIN U12   IOSTANDARD LVCMOS33 } [get_ports { jc[7] }]; #IO_L2N_T0_34 Sch=jc_n[4]   
 
 ##Pmod Header JE 
-set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS25 } [get_ports { iRs }]; #IO_L4P_T0_34 Sch=je[1]
-set_property -dict { PACKAGE_PIN W16   IOSTANDARD LVCMOS25 } [get_ports { oRs }]; #IO_L18N_T2_34 Sch=je[2]
+set_property -dict { PACKAGE_PIN V12   IOSTANDARD LVCMOS25 } [get_ports { iUART }]; #IO_L4P_T0_34 Sch=je[1]
+set_property -dict { PACKAGE_PIN W16   IOSTANDARD LVCMOS25 } [get_ports { oUART }]; #IO_L18N_T2_34 Sch=je[2]
 #set_property -dict { PACKAGE_PIN J15   IOSTANDARD LVCMOS33 } [get_ports { je[2] }]; #IO_25_35 Sch=je[3]                          
 #set_property -dict { PACKAGE_PIN H15   IOSTANDARD LVCMOS33 } [get_ports { je[3] }]; #IO_L19P_T3_35 Sch=je[4]                     
 #set_property -dict { PACKAGE_PIN V13   IOSTANDARD LVCMOS33 } [get_ports { je[4] }]; #IO_L3N_T0_DQS_34 Sch=je[7]                  
@@ -41,4 +41,4 @@ set_property -dict { PACKAGE_PIN W16   IOSTANDARD LVCMOS25 } [get_ports { oRs }]
 #set_property -dict { PACKAGE_PIN N18   IOSTANDARD LVCMOS25 } [get_ports { oSCLK }]; #IO_L13P_T2_MRCC_34 Sch=ac_scl
 #set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS25 } [get_ports { ioSDIN }]; #IO_L23P_T3_34 Sch=ac_sda
 
-set_property -dict { PACKAGE_PIN M14 IOSTANDARD LVCMOS25 } [get_ports { oGPIO }];
+set_property -dict { PACKAGE_PIN M14   IOSTANDARD LVCMOS25 } [get_ports { oGPIO }];

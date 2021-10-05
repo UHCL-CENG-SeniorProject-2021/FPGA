@@ -81,8 +81,8 @@ add_files [glob ${origin_dir}/ip/*.xci]
 
 # Set 'sources_1' fileset properties and set project "top"
 set obj [get_filesets sources_1]
-#set_property -name "top" -value "zybo_top" -objects $obj
-set_property -name "top" -value "test_top" -objects $obj
+set_property -name "top" -value "zybo_top" -objects $obj
+#set_property -name "top" -value "test_top" -objects $obj
 
 #
 # Constraints

@@ -56,8 +56,6 @@ set GAISLER_SET {
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spi.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrl.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrlx.vhd
-	../Vivado_Project/grlib-main/lib/gaisler/spi/spi2ahb.vhd
-	../Vivado_Project/grlib-main/lib/gaisler/spi/spi2ahbx.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/misc/grgpio.vhd
 }
 
@@ -77,20 +75,23 @@ read_vhdl -library grlib $GRLIB_SET
 read_vhdl -library techmap $TECHMAP_SET
 read_vhdl -library gaisler $GAISLER_SET
 
-# Add all .vhd and .xci in origin to project
+#read_vhdl -library work [ glob ${origin_dir}/*.vhd]
 add_files [glob ${origin_dir}/*.vhd]
 add_files [glob ${origin_dir}/ip/*.xci]
 
-# Set 'sources_1' fileset properties and set project "top"
+
+# Set 'sources_1' fileset properties
 set obj [get_filesets sources_1]
-#set_property -name "top" -value "zybo_top" -objects $obj
-set_property -name "top" -value "test_top" -objects $obj
+set_property -name "top" -value "zybo_top" -objects $obj
 
 #
 # Constraints
 #
 
-# Set 'constrs_1' fileset properties and add Constraints.xdc
+# Set 'constrs_1' fileset object
 set obj [get_filesets constrs_1]
-add_files -fileset constrs_1 "$origin_dir/constraints/Constraints.xdc"
+
+# Add/Import constrs file and set constrs file properties
+set file "[file normalize "$origin_dir/constraints/Constraints.xdc"]"
+set file_imported [import_files -fileset constrs_1 [list $file]]
 set_property -name "target_constrs_file" -value "[get_files Constraints.xdc]" -objects $obj

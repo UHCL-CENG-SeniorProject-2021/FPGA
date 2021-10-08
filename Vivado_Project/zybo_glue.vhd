@@ -15,8 +15,8 @@ port (
             -- IO buffers
             iIO_data: in std_logic_vector;
             iIO_en: in std_logic_vector;
-            oIO_data: out std_logic_vector
---            ioIO_pins: inout std_logic_vector
+            oIO_data: out std_logic_vector;
+            ioIO_pins: inout std_logic_vector
 );
 end entity;
 
@@ -46,7 +46,7 @@ oReset_i2s <= not reset;
 IOBUF_inst1 : IOBUF
    port map (
       O => oIO_data(1),     -- Buffer output
---      IO => ioIO_pins(1),   -- Buffer inout port (connect directly to top-level port)
+      IO => ioIO_pins(1),   -- Buffer inout port (connect directly to top-level port)
       I => iIO_data(1),     -- Buffer input
       T => iIO_en(1)       -- 3-state enable input, high=input, low=output
    );
@@ -54,7 +54,7 @@ IOBUF_inst1 : IOBUF
 IOBUF_inst2 : IOBUF
    port map (
       O => oIO_data(2),     -- Buffer output
---      IO => ioIO_pins(2),   -- Buffer inout port (connect directly to top-level port)
+      IO => ioIO_pins(2),   -- Buffer inout port (connect directly to top-level port)
       I => iIO_data(2),     -- Buffer input
       T => iIO_en(2)       -- 3-state enable input, high=input, low=output
    );
@@ -77,7 +77,7 @@ port map (
 
    port map (
       O => oIO_data(0),     -- Buffer output
---      IO => ioIO_pins(0),   -- Buffer inout port (connect directly to top-level port)
+      IO => ioIO_pins(0),   -- Buffer inout port (connect directly to top-level port)
       I => iIO_data(0),     -- Buffer input
       T => iIO_en(0)       -- 3-state enable input, high=input, low=output
    );

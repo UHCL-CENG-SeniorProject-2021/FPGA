@@ -22,9 +22,8 @@ set_property -name "simulator_language" -value "Mixed" -objects $obj
 set_property -name "target_language" -value "VHDL" -objects $obj
 set_property -name "xpm_libraries" -value "XPM_CDC" -objects $obj
 
-#
-# Sources
-#
+
+# Add all required GRLIB sources to project
 
 set GRLIB_SET {
     ../Vivado_Project/grlib-main/lib/grlib/stdlib/version.vhd
@@ -75,20 +74,14 @@ read_vhdl -library grlib $GRLIB_SET
 read_vhdl -library techmap $TECHMAP_SET
 read_vhdl -library gaisler $GAISLER_SET
 
-# Add all .vhd and .xci in origin to project
+# Add all .vhd and .xci files
 add_files [glob ${origin_dir}/*.vhd]
 add_files [glob ${origin_dir}/ip/*.xci]
 
-# Set 'sources_1' fileset properties and set project "top"
+# Set Top file
 set obj [get_filesets sources_1]
 set_property -name "top" -value "zybo_top" -objects $obj
-#set_property -name "top" -value "test_top" -objects $obj
 
-#
-# Constraints
-#
-
-# Set 'constrs_1' fileset properties and add Constraints.xdc
+# Set Constraints
 set obj [get_filesets constrs_1]
-add_files -fileset constrs_1 "$origin_dir/constraints/Constraints.xdc"
-set_property -name "target_constrs_file" -value "[get_files Constraints.xdc]" -objects $obj
+read_xdc ./constraints/Constraints.xdc

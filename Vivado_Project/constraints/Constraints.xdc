@@ -13,4 +13,4 @@ set_property -dict { PACKAGE_PIN W14   IOSTANDARD LVCMOS18 } [get_ports { ioSDA 
 set_property -dict { PACKAGE_PIN Y14   IOSTANDARD LVCMOS18 } [get_ports { ioSCL }];
 
 ## Audio Codec
-set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS18 } [get_ports { ioSDIN }];  
+set_property -dict { PACKAGE_PIN N17   IOSTANDARD LVCMOS18 } [get_ports { ioSDIN }];

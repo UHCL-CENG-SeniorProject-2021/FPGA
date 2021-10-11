@@ -3,43 +3,31 @@ use ieee.std_logic_1164.all;
 
 entity product_top is
     Port (
-    -- system signals
+    -- System signals
         iClk_core: in std_logic;
         iReset_core: in std_logic;
         iClk_i2s: in std_logic;
         iReset_i2s: in std_logic;
 
-    -- rpi comms
-        -- uart
+    -- RPI COMMS
+        -- UART
         iUart: in std_logic;
         oUart: out std_logic;
 
-        -- spi
-        iSck: in std_logic;
-        iCsn: in std_logic;
-        oMiso: out std_logic;
-        iMosi: in std_logic;
-
-        -- i2c
-        iSda: in std_logic;
-        oSda_e: out std_logic;
-        oSda: out std_logic;
-        iScl: in std_logic;
-        oScl_e: out std_logic;
-        oScl: out std_logic;
-
-    -- SSM2603
-        -- i2s: 2 channels sampled @ BCLK
-        oBclk: out std_logic; -- i2s clock
-        -- playback channel
-        oPbdat: out std_logic; -- i2s playback data
-        oPblrc: out std_logic; -- i2s playback left-right signal
-        -- record channel
-        oRecdat: out std_logic; -- i2s recorded data
-        oReclrc: out std_logic; -- i2s rec left-right signal
+--    -- SSM2603
+--        -- I2S: 2 channels sampled @ BCLK
+--        oBclk: out std_logic;       -- i2s clock
+--        -- playback channel
+--        oPbdat: out std_logic;      -- i2s playback data
+--        oPblrc: out std_logic;      -- L/R playback clock
+--        -- record channel
+--        oRecdat: out std_logic;     -- i2s recorded data
+--        oReclrc: out std_logic;     -- L/R recorded clock
 
         -- audio control i2c
+        iSclk: in std_logic;
         oSclk: out std_logic;
+        oSclk_e: out std_logic;
         iSdin: in std_logic;
         oSdin_e: out std_logic;
         oSdin: out std_logic;
@@ -49,7 +37,21 @@ entity product_top is
         oMclk: out std_logic;
         
         -- LED
-        LED: out std_logic
+        LED: out std_logic;
+        
+        -- SPI
+        iSck: in std_logic;
+        iCsn: in std_logic;
+        oMiso: out std_logic;
+        iMosi: in std_logic
+
+--        -- I2C
+--        iSda: in std_logic;
+--        iScl: in std_logic;
+--        oSda_e: out std_logic;
+--        oSda: out std_logic;
+--        oScl_e: out std_logic;
+--        oScl: out std_logic;
     );
 end entity;
 
@@ -68,15 +70,24 @@ component logic_top is
         iUART: in std_logic;
         oUART: out std_logic;
 
-         --SPI
+        -- Debug UART
+        iUART_dbg: in std_logic;
+        oUART_dbg: out std_logic;
+        
+                 --SPI
         iSck: in std_logic;
         iCsn: in std_logic;
         iMosi: in std_logic;
         oMiso: out std_logic;
-
-        -- Debug UART
-        iUART_dbg: in std_logic;
-        oUART_dbg: out std_logic;
+        
+        -- I2C
+        iSclk: in std_logic;
+        oSclk: out std_logic;
+        oSclk_e: out std_logic;
+        
+        iSdin: in std_logic;
+        oSdin_e: out std_logic;
+        oSdin: out std_logic;
 
         iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
@@ -120,20 +131,38 @@ end component;
     signal sNd_rx: std_logic;
     signal sData_rx: std_logic_vector (cW-1 downto 0);
     signal sAck_rx: std_logic;
+    -- i2c signals
+    signal sI2Ci: std_logic;
+    signal sI2Co: std_logic;
 
 begin
 
        tester: logic_top port map(
         iClk => iClk_core, 
         iReset => '1',
+        
+        iUART => '1',
+        oUART => open,
+        
         iUART_dbg => iUART,
         oUART_dbg => oUART,
-        oGPIO => LED,
-        iUART => '1',
-        iSck => '1',
-        iCsn => '1',
+        
+        iSck => iSck,
+        iCsn => iCsn,
+        iMosi => iMosi,
+        oMiso => oMiso,
+        
+        -- I2C
+        iSclk => iSclk,
+        oSclk => oSclk,
+        oSclk_e => oSclk_e,
+        
+        iSdin => iSdin,
+        oSdin_e => oSdin_e,
+        oSdin => oSdin,
+        
         iGPIO => (others=>'0'),
-        iMosi => '1'    
+        oGPIO => LED
         );        
         
 --    i2s_ctrl_inst: i2s_ctrl

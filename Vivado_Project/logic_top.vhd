@@ -10,25 +10,39 @@ use gaisler.leon3.all;
 use gaisler.uart.all;
 use gaisler.misc.all;
 use gaisler.spi.all;
+use gaisler.i2c.all;
+
+library techmap;
+use techmap.gencomp.all;
 
 entity logic_top is
     port (
+        -- Clocks
         iClk: in std_logic;
         iReset: in std_logic;
-
+        
         -- UART
         iUART: in std_logic;
         oUART: out std_logic;
 
+        -- Debug UART
+        iUart_dbg: in std_logic;
+        oUart_dbg: out std_logic;
+        
          --SPI
         iSck: in std_logic;
         iCsn: in std_logic;
         iMosi: in std_logic;
         oMiso: out std_logic;
-
-        -- Debug UART
-        iUart_dbg: in std_logic;
-        oUart_dbg: out std_logic;
+        
+        -- I2C
+        iSclk: in std_logic;
+        oSclk: out std_logic;
+        oSclk_e: out std_logic;
+        
+        iSdin: in std_logic;
+        oSdin_e: out std_logic;
+        oSdin: out std_logic;
 
         iGPIO: in std_logic_vector (8 downto 0);
         oGPIO: out std_logic
@@ -37,27 +51,31 @@ end logic_top;
 
 architecture logic_top_arc of logic_top is
 
-    ----------------- AMBA constants
-    constant cAHB_def_master: integer := 0;
-    constant cAPBCTRL_AHB_addr: integer := 16#800#;
-    constant cAPBCTRL_AHB_mask: integer := 16#f00#;
+    -- AMBA constants
+    constant cAHB_def_master:       integer := 0;
+    constant cAPBCTRL_AHB_addr:     integer := 16#800#;
+    constant cAPBCTRL_AHB_mask:     integer := 16#f00#;
 
-    ----------- AMBA AHB Masters Indeces
-    constant cINDEX_AHBM_UART_DBG: integer := 0;
-    constant cAHB_mst_num: integer := 1;
+    -- AMBA AHB Masters Indeces
+    constant cINDEX_AHBM_UART_DBG:  integer := 0;
+    constant cAHB_mst_num:          integer := 1;
 
-    ---------------- AMBA AHB Slaves Indeces
-    constant cINDEX_AHBS_APBCTRL: integer := 0;
-    constant cAHB_slv_num: integer := 1;
+    -- AMBA AHB Slaves Indeces
+    constant cINDEX_AHBS_APBCTRL:   integer := 0;
+    constant cAHB_slv_num:          integer := 1;
 
-    ------------------ AMBA APB Indeces
-    constant cINDEX_APB_GPIO: integer := 0;
-    constant cINDEX_APB_APBUART: integer := 1;
-    constant cINDEX_APB_SPI: integer := 2;
-    constant cINDEX_APB_UART_DBG: integer := 3;
-    constant cAPB_slv_num: integer := 4;
+    -- AMBA APB Indeces
+    constant cINDEX_APB_GPIO:       integer := 0;
+    constant cINDEX_APB_APBUART:    integer := 1;
+    constant cINDEX_APB_SPI:        integer := 2;
+    constant cINDEX_APB_UART_DBG:   integer := 3;
+    constant cINDEX_APB_I2C:        integer := 4;
+    constant cAPB_slv_num:          integer := 5;
 
-    constant cGPIO_width: integer := 10;
+    constant cGPIO_width:           integer := 10;
+    
+    -- IOPAD
+    constant padtech:               integer := 0;                                      
 
     signal sReset_synch: std_logic;
 
@@ -81,21 +99,36 @@ architecture logic_top_arc of logic_top is
 
     signal sGPIOi: gpio_in_type;
     signal sGPIOo: gpio_out_type;
+    
+    signal sI2Ci: i2c_in_type;
+    signal sI2Co: i2c_out_type;
 
 begin
-
+    -- APB UART
     sUARTi.rxd <= iUART;
     sUARTi.extclk <= '0';
     sUARTi.ctsn <= '1';
     oUART <= sUARTo.txd;
-
+    
+    -- AHB UART
+    sUART_dbg_i.rxd <= iUart_dbg;
+    oUart_dbg <= sUART_dbg_o.txd;
+   
+    -- SPI
     sSPIi.sck <= iSck;
     sSPIi.spisel <= iCsn;
     sSPIi.mosi <= iMosi;
     oMiso <= sSPIo.miso;
-
-    sUART_dbg_i.rxd <= iUart_dbg;
-    oUart_dbg <= sUART_dbg_o.txd;
+    
+-- I2C
+    -- IN record
+    sI2Ci.sda <= iSdin;
+    sI2Ci.scl <= iSclk;
+    -- OUT record
+    oSclk <= sI2Co.scl;
+    oSclk_e <= sI2Co.scloen;
+    oSdin <= sI2Co.sda;
+    oSdin_e <= sI2Co.sdaoen;
 
     sGPIOi.din(8 downto 0) <= iGPIO;
     oGPIO <= sGPIOo.dout(9);
@@ -211,5 +244,25 @@ begin
             uarti => sUARTi,
             uarto => sUARTo
         );
-
+        
+            -- I2C-slave
+    i2cslv0 : i2cslv
+        generic map (
+            pindex => cINDEX_APB_I2C,   -- APB slave index
+            paddr => cINDEX_APB_I2C,    -- ADDR field of APB
+            pmask => 16#FFF#,           -- MASK field of APB
+            pirq => 1,                  -- interrupt by i2c
+            hardaddr => 0,              -- 0: slv can change addr 1: cannot change
+            tenbit => 1,                -- 0: no 10-bit 1: 10-bit support
+            i2caddr => 16#50#           -- slave's initial i2c addr
+        )
+        port map (
+            rstn => sReset_synch,           -- reset
+            clk => iClk,                    -- clock
+            apbi => sAPBi,                  -- APB slv input
+            apbo => sAPBo(cINDEX_APB_I2C),  -- APB slv output;
+            i2ci => sI2Ci,                  -- i2c clock input
+            i2co => sI2Co                   -- i2c clock output
+        );
+        
 end logic_top_arc;

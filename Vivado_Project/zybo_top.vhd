@@ -5,15 +5,37 @@ entity zybo_top is
     port (
         -- System Clock
         iClk: in std_logic;
+        
         -- UART
-        iUART: in std_logic;
-        oUART: out std_logic;
+        iUART: in std_logic;        -- Rx
+        oUART: out std_logic;       -- Tx
         -- I2C
-        ioSDA: inout std_logic;
-        ioSCL: inout std_logic;
-        ioSDIN: inout std_logic;
+--        ioSDA: inout std_logic;     -- I/O data
+        
+-- SSM2603 (addr: 0011010b)        
+        -- I2C (config)
+        oSCLK: inout std_logic;       -- I/O clock
+        ioSDIN: inout std_logic;    -- Audio Codec config (N17)
+        
+        -- I2S
+--        oBCLK: out std_logic;       -- i2s clock
+        -- playback channel
+--        oPBDAT: out std_logic;      -- playback data
+--        oPBLRC: out std_logic;      -- L/R playback clock
+        -- record channel
+--        oRECDAT: out std_logic;     -- i2s recorded data
+--        oRECLRC: out std_logic;     -- L/R recorded clock
+        -- misc/system
+--        oMUTE: out std_logic;
+--        oMCLK: out std_logic;
+
         -- LED
-        oGPIO: out std_logic
+        oGPIO: out std_logic;
+        -- SPI
+        iSck: in std_logic;
+        iCsn: in std_logic;
+        oMiso: out std_logic;
+        iMosi: in std_logic
     );
 end zybo_top;
 
@@ -27,62 +49,65 @@ architecture Behavioral of zybo_top is
 
     signal sClk_core: std_logic;
     signal sReset_core: std_logic;
-    signal sClk_i2s: std_logic;
+    signal sClk_i2s: std_logic;                 -- codec clock
+    
     signal sReset_i2s: std_logic;
 
  component product_top
         port (
-        -- system signals
-            iClk_core: in std_logic;
-            iReset_core: in std_logic;
-            iClk_i2s: in std_logic;
-            iReset_i2s: in std_logic;
+    -- System signals
+        iClk_core: in std_logic;
+        iReset_core: in std_logic;
+        iClk_i2s: in std_logic;
+        iReset_i2s: in std_logic;
 
-        -- rpi comms
-            -- uart
-            iUart: in std_logic;
-            oUart: out std_logic;
+    -- RPI COMMS
+        -- UART
+        iUart: in std_logic;
+        oUart: out std_logic;
 
-            -- spi
---            iSck: in std_logic;
---            iCsn: in std_logic;
---            oMiso: out std_logic;
---            iMosi: in std_logic;
+    -- SSM2603
+--        -- I2S: 2 channels sampled @ BCLK
+--        oBclk: out std_logic;       -- i2s clock
+--        -- playback channel
+--        oPbdat: out std_logic;      -- i2s playback data
+--        oPblrc: out std_logic;      -- L/R playback clock
+--        -- record channel
+--        oRecdat: out std_logic;     -- i2s recorded data
+--        oReclrc: out std_logic;     -- L/R recorded clock
 
-            -- i2c
-            iSda: in std_logic;
-            oSda_e: out std_logic;
-            oSda: out std_logic;
-            iScl: in std_logic;
-            oScl_e: out std_logic;
-            oScl: out std_logic;
+        -- audio control i2c
+        iSclk: in std_logic;
+        oSclk: out std_logic;
+        oSclk_e: out std_logic;
+        iSdin: in std_logic;
+        oSdin_e: out std_logic;
+        oSdin: out std_logic;
 
-        -- SSM2603
-            -- i2s: 2 channels sampled @ BCLK
---            oBclk: out std_logic; -- i2s clock
---             playback channel
---            oPbdat: out std_logic; -- i2s playback data
---            oPblrc: out std_logic; -- i2s playback left-right signal
---             record channel
---            oRecdat: out std_logic; -- i2s recorded data
---            oReclrc: out std_logic; -- i2s rec left-right signal
+        -- misc/system
+        oMute: out std_logic;
+        oMclk: out std_logic;
+        
+        -- LED
+        LED: out std_logic;
+        
+        -- SPI
+        iSck: in std_logic;
+        iCsn: in std_logic;
+        oMiso: out std_logic;
+        iMosi: in std_logic
 
-            -- audio control i2c
---            oSclk: out std_logic;
---            iSdin: in std_logic;
---            oSdin_e: out std_logic;
---            oSdin: out std_logic;
-
-            -- misc/system
---            oMute: out std_logic;
---            oMclk: out std_logic;
-            
-            -- LED
-            LED: out std_logic
+--        -- I2C
+--        iSda: in std_logic;
+--        iScl: in std_logic;
+--        oSda_e: out std_logic;
+--        oSda: out std_logic;
+--        oScl_e: out std_logic;
+--        oScl: out std_logic
         );
     end component;
 
-component zybo_glue -- 2nd task
+component zybo_glue
         port (
             -- clocks
             iCLK: in std_logic;
@@ -111,27 +136,13 @@ begin
             iClk_i2s => sClk_i2s,
             iReset_i2s  => sReset_i2s,
 
-        -- rpi comms
-            -- uart
+            -- RPI COMMS
+            -- UART
             iUart => iUart,
             oUart => oUart,
-
-        -- spi
---            iSck => iSck,
---            iCsn => iCsn,
---            oMiSO => oMiSO,
---            iMOSI => iMOSI,
-
-        -- i2c
-            iSda => sIO_odata(0),
-            oSda_e => sIO_en(0),
-            oSda => sIO_idata(0),
-            iScl => sIO_odata(1),
-            oScl_e => sIO_en(1),
-            oScl => sIO_idata(1),
-            LED => oGPIO
-        -- SSM2603
-        -- i2s: 2 channels sampled @ BCLK
+            
+-- SSM2603
+        -- I2S: 2 channels sampled @ BCLK
 --            oBclk => oBclk,
             -- playback channel
 --            oPbdat => oPbdat,
@@ -141,21 +152,33 @@ begin
 --            oReclrc => oReclrc,
 
             -- audio control i2c
---            oSclk => oSclk,
+            iSdin => sIO_odata(0),
+            oSdin_e => sIO_en(0),
+            oSdin => sIO_idata(0),
+            iSclk => sIO_odata(1),
+            oSclk_e => sIO_en(1),
+            oSclk => sIO_idata(1),
 --            iSdin => sIO_odata(2),
 --            oSdin_e => sIO_en(2),
---            oSdin => sIO_idata(2),
+--            oSdin => sIO_idata(2)
 
             -- misc/system
 --            oMute => oMute,
 --            oMclk => oMclk
+
+        -- SPI
+            iSck => iSck,
+            iCsn => iCsn,
+            oMiSO => oMiSO,
+            iMOSI => iMOSI,
+            
+            LED => oGPIO
         );
 
     glue: zybo_glue
         port map (
-            -- clocks
+            -- clocks/resets
             iCLK => iCLK,
-
             oClk_core => sClk_core,
             oReset_core => sReset_core,
             oClk_i2s => sClk_i2s,
@@ -165,10 +188,9 @@ begin
             iIO_data => sIO_idata,
             iIO_en => sIO_en,
             oIO_data => sIO_odata,
-
-            ioIO_pins(0) => ioSDA,
-            ioIO_pins(1) => ioSCL,
-            ioIO_pins(2) => ioSDIN
+            ioIO_pins(0) => ioSDIN,
+            ioIO_pins(1) => oSCLK
+--            ioIO_pins(2) => ioSDIN
         );
 
 end Behavioral;

@@ -56,6 +56,8 @@ set GAISLER_SET {
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrl.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/spi/spictrlx.vhd
 	../Vivado_Project/grlib-main/lib/gaisler/misc/grgpio.vhd
+	../Vivado_Project/grlib-main/lib/gaisler/i2c/i2c.vhd
+	../Vivado_Project/grlib-main/lib/gaisler/i2c/i2cslv.vhd
 }
 
 set TECHMAP_SET {

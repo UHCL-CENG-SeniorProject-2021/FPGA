@@ -6,13 +6,13 @@ set_property -dict { PACKAGE_PIN V12 IOSTANDARD LVCMOS18 } [get_ports { iUART }]
 set_property -dict { PACKAGE_PIN W16 IOSTANDARD LVCMOS18 } [get_ports { oUART }];
 
 ##LEDs
-set_property -dict { PACKAGE_PIN M14 IOSTANDARD LVCMOS18 } [get_ports { oGPIO }];
+set_property -dict { PACKAGE_PIN M14 IOSTANDARD LVCMOS18 } [get_ports { LED }];
 
 ##Pmod Header JC                                                                                                                  
-set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS18     } [get_ports { iSck  }]
+set_property -dict { PACKAGE_PIN V15   IOSTANDARD LVCMOS18     } [get_ports { iSck  }];
 set_property -dict { PACKAGE_PIN W15   IOSTANDARD LVCMOS18     } [get_ports { iCsn  }];
-set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS18     } [get_ports { oMiso }];              
-set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS18     } [get_ports { iMosi }];              
+set_property -dict { PACKAGE_PIN T11   IOSTANDARD LVCMOS18     } [get_ports { oMiso }];
+set_property -dict { PACKAGE_PIN T10   IOSTANDARD LVCMOS18     } [get_ports { iMosi }];
 #set_property -dict { PACKAGE_PIN W14   IOSTANDARD LVCMOS18     } [get_ports { jc[4] }];              
 #set_property -dict { PACKAGE_PIN Y14   IOSTANDARD LVCMOS18     } [get_ports { jc[5] }];              
 #set_property -dict { PACKAGE_PIN T12   IOSTANDARD LVCMOS18     } [get_ports { jc[6] }];              

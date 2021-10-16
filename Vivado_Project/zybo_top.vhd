@@ -29,8 +29,8 @@ entity zybo_top is
 --        oMUTE: out std_logic;
 --        oMCLK: out std_logic;
 
-        -- LED
-        oGPIO: out std_logic;
+        -- GPIO
+        LED: out std_logic;
         -- SPI
         iSck: in std_logic;
         iCsn: in std_logic;
@@ -104,6 +104,7 @@ architecture Behavioral of zybo_top is
 --        oSda: out std_logic;
 --        oScl_e: out std_logic;
 --        oScl: out std_logic
+        -- GPIO
         );
     end component;
 
@@ -172,7 +173,7 @@ begin
             oMiSO => oMiSO,
             iMOSI => iMOSI,
             
-            LED => oGPIO
+            LED => LED
         );
 
     glue: zybo_glue
